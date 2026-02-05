@@ -1,0 +1,37 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+.idea/
+*.swp
+*.swo
+*~
+
+# Pre-push review output (generated files)
+.pre-push-review/
+
+# Review output files (generated files)
+reviews/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Generated slides and images (optional - uncomment if needed)
+# slides/
+# *.png
+
+# 社内機密情報を含む可能性があるスキル
+skills/resume-screening/

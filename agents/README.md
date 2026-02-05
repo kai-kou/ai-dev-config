@@ -1,0 +1,130 @@
+# Cursor Custom Agents
+
+Cursor IDE用のカスタムエージェント（サブエージェント）集です。ドキュメントレビュー、プッシュ前レビュー、スライド生成などのワークフローを自動化します。
+
+## 概要
+
+このリポジトリには、Cursor IDEで使用できるカスタムエージェント定義ファイル（`.md`形式）が含まれています。各エージェントは特定のタスクに特化しており、複数のサブエージェントを組み合わせた複雑なワークフローを実行できます。
+
+## エージェント一覧
+
+### オーケストレーター（メインエージェント）
+
+| エージェント | 説明 | 使用例 |
+|-------------|------|--------|
+| `document-review-all.md` | 5つのAIモデルで並列レビューし、統合して修正計画書を作成 | 「ドキュメントをレビューして修正計画書を作成」 |
+| `pre-push-review.md` | Push前にセキュリティ・品質・依存関係をチェック | 「Push前にレビュー」「コードをチェック」 |
+| `slide-generator.md` | ドキュメントから対象ユーザー向けMarpスライドを作成 | 「スライドを作成」「プレゼン資料を作成」 |
+
+### ドキュメントレビュー・サブエージェント
+
+`document-review/` ディレクトリに含まれています：
+
+| エージェント | 役割 | 観点 |
+|-------------|------|------|
+| `review-opus-4.5.md` | 戦略コンサルタント兼組織開発エキスパート | 全体構造、戦略的整合性 |
+| `review-sonnet-4.5.md` | プロジェクトマネージャー兼実行設計スペシャリスト | 実行可能性、詳細設計 |
+| `review-gpt-5.2-codex.md` | ロジカルシンキング専門家兼データアナリスト | 論理的整合性 |
+| `review-gemini-3-pro.md` | ワークショップ・ファシリテーター兼UXデザイナー | 参加者体験、心理的安全性 |
+| `review-grok-code.md` | リスクマネージャー兼イノベーションコンサルタント | リスク分析、代替案 |
+| `review-integrate.md` | レビュー統合スペシャリスト | 複数レビューの統合 |
+| `revision-plan.md` | 修正計画書作成スペシャリスト | 修正計画書の作成 |
+
+### Pre-Pushレビュー・サブエージェント
+
+`pre-push-review/` ディレクトリに含まれています：
+
+| エージェント | 役割 | チェック内容 |
+|-------------|------|------------|
+| `security-check.md` | セキュリティスペシャリスト | 機密情報・APIキー・パスワード |
+| `code-quality.md` | コード品質スペシャリスト | Linter・型チェック・コードスタイル |
+| `git-hygiene.md` | Git衛生スペシャリスト | コミットメッセージ・.gitignore |
+| `documentation.md` | ドキュメントスペシャリスト | README・必要なドキュメント |
+| `dependency-check.md` | 依存関係スペシャリスト | 脆弱性・ライセンス問題 |
+| `integrate-and-fix.md` | 統合・自動修正スペシャリスト | 結果統合・自動修正 |
+
+### スライド作成・サブエージェント
+
+`slide-generator/` ディレクトリに含まれています：
+
+| エージェント | 役割 | 機能 |
+|-------------|------|------|
+| `analyze-document.md` | ドキュメント分析スペシャリスト | 要点抽出・スライド構成案作成 |
+| `create-marp-slides.md` | Marpスライドクリエイター | 16:9最適化されたMarpスライド作成 |
+| `google-slides-creator.md` | Googleスライドクリエイター | インフォグラフィック画像からGoogleスライド作成 |
+
+## 使用方法
+
+### 前提条件
+
+- [Cursor IDE](https://cursor.sh/) がインストールされていること
+- カスタムエージェント機能が有効になっていること
+
+### セットアップ
+
+1. このリポジトリをクローン：
+
+```bash
+git clone https://github.com/kai-kou/cursor-agents.git
+```
+
+2. Cursorの設定でエージェントディレクトリを指定
+
+3. チャットで以下のように呼び出し：
+
+```
+# ドキュメントレビュー
+ドキュメントをレビューして修正計画書を作成してください
+対象: /path/to/document.md
+
+# Push前レビュー
+Push前にレビューしてください
+
+# スライド作成（基本）
+プロジェクト計画書.md を経営層向けにスライド化してください
+
+# スライド作成（フルオプション）
+API設計書.md をエンジニア向けにスライド化してください --google-slides
+```
+
+## ファイル構造
+
+```
+.
+├── README.md                    # このファイル
+├── LICENSE                      # MITライセンス
+├── document-review-all.md       # ドキュメントレビュー・オーケストレーター
+├── pre-push-review.md           # Pre-Pushレビュー・オーケストレーター
+├── slide-generator.md           # スライド作成・オーケストレーター
+├── document-review/             # ドキュメントレビュー・サブエージェント
+│   ├── review-gemini-3-pro.md
+│   ├── review-gpt-5.2-codex.md
+│   ├── review-grok-code.md
+│   ├── review-integrate.md
+│   ├── review-opus-4.5.md
+│   ├── review-sonnet-4.5.md
+│   └── revision-plan.md
+├── pre-push-review/             # Pre-Pushレビュー・サブエージェント
+│   ├── code-quality.md
+│   ├── dependency-check.md
+│   ├── documentation.md
+│   ├── git-hygiene.md
+│   ├── integrate-and-fix.md
+│   └── security-check.md
+└── slide-generator/             # スライド作成・サブエージェント
+    ├── analyze-document.md
+    ├── create-marp-slides.md
+    └── google-slides-creator.md
+```
+
+## ライセンス
+
+MIT License - 詳細は [LICENSE](LICENSE) を参照してください。
+
+## 貢献
+
+Issue や Pull Request を歓迎します。
+
+## 作者
+
+kai.ko
