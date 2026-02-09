@@ -15,6 +15,12 @@ description: 分析結果に基づいて各スライドの構成と画像生成�
 
 ## ワークフロー
 
+### Step 0: infographic-generatorスキルの読み込み
+
+1. `Read` ツールで `~/.cursor/skills/infographic-generator/SKILL.md` を読み込む
+2. プロンプトテンプレートとデザイン方針を把握する
+3. 以降のStep 4（画像生成プロンプト作成）で、このスキルのテンプレートを**基盤**として使用する
+
 ### Step 1: 分析結果の読み込み
 
 1. 分析レポートを `Read` ツールで読み込む
@@ -63,17 +69,18 @@ description: 分析結果に基づいて各スライドの構成と画像生成�
 
 各スライドに対して、GenerateImage ツール用のプロンプトを作成する。
 
-**重要**: デザインは `infographic-generator` スキルのプロンプトテンプレートとデザイン方針に従う。固定的なスタイル（corporate, tech 等）は指定せず、スライドの内容と対象ユーザーからAIが最適なデザインを自動判断する。これにより、ユーザーの想定を超えるクリエイティブなデザインが実現される。
+**重要**: デザインは `infographic-generator` スキル（Step 0で読み込み済み）のプロンプトテンプレートとデザイン方針を**基本スタイル**として適用する。グラフィックレコーディング（グラレコ）風の手描きスケッチスタイルを基本とし、スライドの内容に合わせてビジュアル要素を調整する。企業プレゼン風のフォーマルなデザイン（ダークネイビー背景、幾何学模様、グラデーション等）は使用しない。
 
-#### デザイン方針
+#### デザイン方針（infographic-generator準拠）
 
-1. **コンテンツドリブン**: スライドの内容（技術的/ビジネス的/クリエイティブ等）からデザインのトーン・色使い・装飾を自動決定
-2. **統一性の確保**: 複数スライド間で統一されたデザインテーマを維持（初回スライド生成時にテーマを決定し、以降のスライドに適用）
-3. **独創性の追求**: 定型的なテンプレートデザインを避け、内容に合わせた独自のビジュアル表現を採用
+1. **グラレコスタイルの適用**: 「手描き風・スケッチ風・温かみのある」スタイルを基本とする。企業テンプレート風のデザインは避ける
+2. **コンテンツドリブンのビジュアル**: スライドの内容に合わせた手描き風モチーフ・アイコン・イラストを配置する（例: セキュリティ→手描き風の盾やロック、成長戦略→スケッチ風の上昇矢印）
+3. **統一性の確保**: 複数スライド間で統一されたカラーパレット・レイアウトパターンを維持する（初回スライド生成時にテーマを決定し、以降のスライドに適用）
 
 #### プロンプト作成時の指針
 
-- デザインのトーン・色使い・装飾は具体的な内容から導出する（例: セキュリティの話題→盾やロックのモチーフ、成長戦略→上昇するグラフや矢印）
+- **infographic-generatorのプロンプトテンプレート（英語）を基盤として使用する**
+- ビジュアル要素はコンテンツの具体的な内容から導出する
 - 対象ユーザーの属性はコンテンツの表現レベルに反映する（専門用語の有無、図解の抽象度等）
 - 背景・カラースキームはスライド全体のストーリーに合わせて統一する
 
@@ -124,7 +131,8 @@ AI画像生成モデルは日本語テキスト描画で品質が低下しやす
 
 - 対象ユーザー: [ユーザータイプ]
 - 総スライド数: [N]枚
-- デザインテーマ: [コンテンツから自動決定されたテーマの説明]
+- デザインスタイル: グラフィックレコーディング風（infographic-generator準拠）
+- デザイン調整: [コンテンツに合わせたビジュアル調整の説明]
 
 ---
 
@@ -138,14 +146,26 @@ AI画像生成モデルは日本語テキスト描画で品質が低下しやす
 ### 画像生成プロンプト
 
 ```
-プレゼンテーションスライド画像（16:9、横長）。
-スタイル: [スタイル指示]
-背景: [背景指示]
-タイトル: [タイトルテキスト]
-サブタイトル: [サブタイトルテキスト]
-ビジュアル要素: [ビジュアル指示]
-フォント: 読みやすい日本語フォント、見出しは大きく太字
-レイアウト: 中央揃え、タイトルを大きく配置
+Create a graphic recording (graphical facilitation) style presentation slide in Japanese.
+
+[Basic Settings]
+- Aspect ratio: 16:9 (landscape)
+- Style: Hand-drawn, sketch-like, warm and approachable
+- Language: Japanese (日本語)
+- Quality: High resolution, clear text
+
+[Content]
+Title: "[タイトルテキスト]"
+Subtitle: "[サブタイトルテキスト]"
+
+[Design]
+- Background: [コンテンツに合わせた背景指示 - 温かみのある色調]
+- Visual elements: [コンテンツに合わせた手描き風イラスト・アイコン]
+- Typography: Bold sans-serif for title, readable Japanese font
+- Layout: Centered, title prominently displayed
+- Decorations: Hand-drawn icons, illustrations, doodles related to the content
+- Color palette: [スライド全体で統一するカラーパレット]
+- IMPORTANT: Do NOT use corporate/formal design (dark navy, geometric patterns, gradients)
 ```
 
 ---
@@ -163,17 +183,29 @@ AI画像生成モデルは日本語テキスト描画で品質が低下しやす
 ### 画像生成プロンプト
 
 ```
-プレゼンテーションスライド画像（16:9、横長）。
-スタイル: [スタイル指示]
-背景: [背景指示]
-タイトル: [タイトルテキスト]
-本文:
-・[ポイント1]
-・[ポイント2]
-・[ポイント3]
-ビジュアル要素: [ビジュアル指示]
-フォント: 読みやすい日本語フォント、見出しは大きく太字
-レイアウト: 左側にテキスト、右側にビジュアル要素
+Create a graphic recording (graphical facilitation) style presentation slide in Japanese.
+
+[Basic Settings]
+- Aspect ratio: 16:9 (landscape)
+- Style: Hand-drawn, sketch-like, warm and approachable
+- Language: Japanese (日本語)
+- Quality: High resolution, clear text
+
+[Content]
+Title: "[タイトルテキスト]"
+Key points:
+- "[ポイント1]"
+- "[ポイント2]"
+- "[ポイント3]"
+
+[Design]
+- Background: [コンテンツに合わせた背景指示 - 温かみのある色調]
+- Visual elements: [コンテンツに合わせた手描き風イラスト・アイコン]
+- Typography: Bold sans-serif for headings, readable Japanese font for body
+- Layout: Text on left, hand-drawn visual elements on right
+- Decorations: Hand-drawn icons, arrows, speech bubbles, flow indicators
+- Color palette: [スライド全体で統一するカラーパレット]
+- IMPORTANT: Do NOT use corporate/formal design (dark navy, geometric patterns, gradients)
 ```
 
 ---
@@ -195,8 +227,10 @@ AI画像生成モデルは日本語テキスト描画で品質が低下しやす
 ### 画像生成プロンプト
 
 ```
-プレゼンテーションスライド画像（16:9、横長）。
-[まとめスライド用プロンプト]
+Create a graphic recording (graphical facilitation) style presentation slide in Japanese.
+[Basic Settings] - Aspect ratio: 16:9 (landscape), Style: Hand-drawn, sketch-like, warm and approachable
+[まとめスライド用コンテンツ・デザイン指示]
+- IMPORTANT: Do NOT use corporate/formal design (dark navy, geometric patterns, gradients)
 ```
 ```
 
@@ -209,7 +243,7 @@ AI画像生成モデルは日本語テキスト描画で品質が低下しやす
 3. **ビジュアル要素**: 各スライドに適切なビジュアル指定があるか
 4. **プロンプトの具体性**: 画像生成プロンプトが十分に具体的か
 5. **デザイン統一性**: 全スライドで統一されたデザインテーマが維持されているか
-6. **デザインの独創性**: コンテンツの内容に応じた独自のビジュアル表現が採用されているか
+6. **infographic-generatorスタイル準拠**: グラレコ風の手描きスケッチスタイルが適用されているか（企業プレゼン風のフォーマルデザインになっていないか）
 7. **対象ユーザー適合性**: 対象ユーザーに合ったトーン・内容になっているか
 8. **構成の流れ**: タイトル→アジェンダ→本編→まとめの自然な流れがあるか
 9. **日本語テキスト品質**:
@@ -228,5 +262,5 @@ AI画像生成モデルは日本語テキスト描画で品質が低下しやす
 スライド構成を作成しました: [ファイルパス]
 - 総スライド数: N枚
 - 対象ユーザー: [ユーザータイプ]
-- デザインテーマ: [コンテンツから自動決定されたテーマ]
+- デザインスタイル: グラレコ風（infographic-generator準拠）+ [コンテンツに合わせた調整内容]
 ```
