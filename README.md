@@ -1,3 +1,17 @@
+---
+project:
+  name: "cursor-agents-skills"
+  title: "Cursor Agents & Skills管理"
+  status: active
+  priority: medium
+  created: "2026-02-05"
+  updated: "2026-02-09"
+  owner: "kai.ko"
+  tags: [cursor, agents, skills, github]
+  summary: "CursorのAgents/SkillsをGitHubで管理"
+  next_action: "Agents/Skills整理・登録"
+---
+
 # Cursor Agents & Skills
 
 Cursor IDE用のカスタムエージェントとスキルの統合リポジトリです。
