@@ -15,6 +15,9 @@ Cursor IDE用のカスタムエージェント（サブエージェント）集�
 | `document-review-all.md` | 5つのAIモデルで並列レビューし、統合して修正計画書を作成 | 「ドキュメントをレビューして修正計画書を作成」 |
 | `pre-push-review.md` | Push前にセキュリティ・品質・依存関係をチェック | 「Push前にレビュー」「コードをチェック」 |
 | `slide-generator.md` | ドキュメントから対象ユーザー向けMarpスライドを作成 | 「スライドを作成」「プレゼン資料を作成」 |
+| `project-manager.md` | プロジェクトのライフサイクル管理（作成・タスク・マイルストーン） | 「新規プロジェクト作成」「タスク追加」「ステータス変更」 |
+| `project-analyzer.md` | プロジェクト横断分析・ダッシュボード生成・レポート作成 | 「ダッシュボード更新」「週次レビュー」「今日のタスク」 |
+| `mtg-reporter.md` | MTG進捗報告サマリーの自動生成（定量+定性） | 「MTG報告を作成」「進捗報告」 |
 
 ### ドキュメントレビュー・サブエージェント
 
@@ -52,6 +55,16 @@ Cursor IDE用のカスタムエージェント（サブエージェント）集�
 | `analyze-document.md` | ドキュメント分析スペシャリスト | 要点抽出・スライド構成案作成 |
 | `create-marp-slides.md` | Marpスライドクリエイター | 16:9最適化されたMarpスライド作成 |
 | `google-slides-creator.md` | Googleスライドクリエイター | インフォグラフィック画像からGoogleスライド作成 |
+
+### プロジェクト分析・サブエージェント
+
+`project-analyzer/` ディレクトリに含まれています：
+
+| エージェント | 役割 | 機能 |
+|-------------|------|------|
+| `scan-project.md` | プロジェクトスキャナー | 個別プロジェクトの進捗データ収集 |
+| `generate-dashboard.md` | ダッシュボードジェネレーター | スキャン結果からDASHBOARD.md生成 |
+| `generate-report.md` | レポートジェネレーター | 週次レビュー・進捗分析・棚卸しレポート生成 |
 
 ## 使用方法
 
@@ -96,6 +109,9 @@ API設計書.md をエンジニア向けにスライド化してください --g
 ├── document-review-all.md       # ドキュメントレビュー・オーケストレーター
 ├── pre-push-review.md           # Pre-Pushレビュー・オーケストレーター
 ├── slide-generator.md           # スライド作成・オーケストレーター
+├── project-manager.md           # プロジェクト管理エージェント
+├── project-analyzer.md          # プロジェクト分析・オーケストレーター
+├── mtg-reporter.md              # MTG進捗報告エージェント
 ├── document-review/             # ドキュメントレビュー・サブエージェント
 │   ├── review-gemini-3-pro.md
 │   ├── review-gpt-5.2-codex.md
@@ -111,10 +127,14 @@ API設計書.md をエンジニア向けにスライド化してください --g
 │   ├── git-hygiene.md
 │   ├── integrate-and-fix.md
 │   └── security-check.md
-└── slide-generator/             # スライド作成・サブエージェント
-    ├── analyze-document.md
-    ├── create-marp-slides.md
-    └── google-slides-creator.md
+├── slide-generator/             # スライド作成・サブエージェント
+│   ├── analyze-document.md
+│   ├── create-marp-slides.md
+│   └── google-slides-creator.md
+└── project-analyzer/            # プロジェクト分析・サブエージェント
+    ├── scan-project.md
+    ├── generate-dashboard.md
+    └── generate-report.md
 ```
 
 ## ライセンス
