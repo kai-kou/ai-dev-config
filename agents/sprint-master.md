@@ -327,6 +327,18 @@ POの「OK」でPhase 3へ遷移する。
 | `tasks.md` | タスク参照・更新 | プランニング時・実行時 |
 | `milestones.md` | マイルストーン参照 | プランニング時 |
 | `~/.cursor/try-stock.md` | Try管理 | レトロスペクティブ時 |
+| `cursor-agents-skills` | agents/skills ソース管理 | agents/skills 作成・変更時 |
+
+### cursor-agents-skills 連携（必須）
+
+agents/ と skills/ は `cursor-agents-skills` リポジトリ（`/Users/kai.ko/dev/01_active/cursor-agents-skills/`）で一元管理し、rsync で `~/.cursor/` に同期される。
+
+**スプリントで agents/skills を作成・変更した場合**:
+1. cursor-agents-skills リポジトリ内で直接作成・編集する
+2. レビューフェーズ完了時に cursor-agents-skills へコミット&push
+3. POに rsync 同期の実行を確認する
+
+**テンプレート（`~/.cursor/templates/`）は rsync 対象外**のため直接配置でよい。
 
 ---
 
