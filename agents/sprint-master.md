@@ -39,10 +39,14 @@ Cursorのチャットセッションを「スプリント」として構造化�
 [Phase 0: セッション判定]
     │
     ├── 対象外 → 通常セッション（終了）
+    ├── リファインメント専用 → [Phase R: リファインメント] → 終了
     │
-    └── 対象
+    └── スプリント対象
         │
         ▼
+[Phase R: リファインメント] ← 必要に応じて（AI提案 or スキップ）
+    │
+    ▼
 [Phase 1: プランニング] → /sprint-master/sprint-planner
     │
     ▼
@@ -101,14 +105,43 @@ POの最初の発言から、スプリント運用の対象/対象外を判定�
 
 ---
 
+## Phase R: リファインメント
+
+product-backlog.md の未精緻アイテムをスプリント投入可能な状態（DoR充足）に精緻化する。
+
+### トリガー
+
+| トリガー | 発動条件 | 起動者 |
+|---------|---------|--------|
+| AI提案 | product-backlog.mdの未精緻アイテムが5件以上、またはスプリント前に精緻済みタスク不足を検知 | sprint-master |
+| PO依頼 | POが「リファインメントしたい」「バックログ整理」等と指示 | PO |
+| スプリント前 | プランニング開始前に必要性を判断 | sprint-master |
+
+### 手順
+
+1. `{project_root}/product-backlog.md` の未精緻アイテムから優先度の高いものを選定
+2. PO補佐（po-assistant Skill）の観点でアイテムを分析
+3. 大きなアイテムは実装可能な粒度のタスクに分解する
+4. SP見積もり・依存関係分析を実施
+5. Definition of Ready（DoR）の全項目を満たすか検証
+6. DoR充足アイテムに正式タスクID（T-xxx）を付与し、tasks.md に登録
+7. product-backlog.md のリファインメントログに記録
+
+### リファインメント専用セッションの場合
+
+POが明示的にリファインメントを依頼した場合、スプリントのフルサイクル（プランニング〜レトロ）は実施せず、リファインメントのみ実行してセッションを終了する。
+
+---
+
 ## Phase 1: プランニング
 
 `/sprint-master/sprint-planner` サブエージェントに委譲する。
 
 ### 入力
 
+- `{project_root}/product-backlog.md`（未精緻アイデア → リファインメントが必要か確認）
 - `{project_root}/milestones.md`（現在のマイルストーンと進捗）
-- `{project_root}/tasks.md`（未着手・進行中タスク）
+- `{project_root}/tasks.md`（リファインメント済みタスク）
 - `~/.cursor/try-stock.md`（前回レトロのTry、優先度Highのもの）
 
 ### 手順
@@ -324,7 +357,8 @@ POの「OK」でPhase 3へ遷移する。
 | 連携先 | 用途 | 呼び出しタイミング |
 |--------|------|-----------------|
 | `project-manager` CMD-3 | タスクステータス更新 | タスク着手時・完了時 |
-| `tasks.md` | タスク参照・更新 | プランニング時・実行時 |
+| `product-backlog.md` | 未精緻アイデアの蓄積 | リファインメント時 |
+| `tasks.md` | リファインメント済みタスクの参照・更新 | プランニング時・実行時 |
 | `milestones.md` | マイルストーン参照 | プランニング時 |
 | `~/.cursor/try-stock.md` | Try管理 | レトロスペクティブ時 |
 | `cursor-agents-skills` | agents/skills ソース管理 | agents/skills 作成・変更時 |
@@ -397,9 +431,10 @@ agents/ と skills/ は `cursor-agents-skills` プロジェクトで管理し、
 
 {project_root}/
 ├── .sprint-logs/
-│   ├── sprint-backlog.md              ← 現在のバックログ
+│   ├── sprint-backlog.md              ← 現在のスプリントバックログ
 │   ├── SPRINT-001.md                  ← 過去のスプリントログ
 │   └── ...
+├── product-backlog.md                 ← プロダクトバックログ（未精緻アイデア）
 ├── milestones.md
-└── tasks.md
+└── tasks.md                           ← リファインメント済みタスク
 ```
