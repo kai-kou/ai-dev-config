@@ -62,6 +62,13 @@ is_background: true
 
 Shell経由でcurlでSlack APIに直接投稿する（サブエージェントからMCPツールは利用不可のため）。
 
+**display_name ハッシュタグの付与**:
+
+curl投稿の場合、slack-fast-mcp の `display_name` 機能が使えないため、自前でメンバー識別タグを付与する：
+- 投稿文の末尾にハッシュタグ行がある場合 → 同じ行に `#member_name` を追記
+- ハッシュタグ行がない場合 → 改行して `#member_name` を追加
+- 例: `#cursor #dev` → `#cursor #dev #kuro`
+
 **投稿コマンド**:
 
 ```bash
@@ -72,14 +79,18 @@ curl -s -X POST "https://slack.com/api/chat.postMessage" \
 ```
 
 - **channel**: 入力パラメータの `channel`、または人格設定の `default_channel`（チャンネルID）
-- **text**: Step 2 で生成した投稿文
+- **text**: Step 2 で生成した投稿文（display_nameタグ付与済み）
 - **重要**: チャンネル指定は**チャンネルID**（例: `C0AE6RT9NG4`）を使用すること
 - レスポンスの `ok` フィールドで成功を確認する
 - 投稿文中に `"` や改行がある場合は適切にエスケープすること
 
 **代替手段（MCP利用可能な場合）**:
 
-親エージェントから直接呼び出される場合、`slack_post_message` MCPツールが使える可能性がある。利用可能ならそちらを優先してよい。
+親エージェントから直接呼び出される場合、`slack_post_message` MCPツールが使える可能性がある。
+利用可能なら以下のパラメータで呼び出す：
+- `channel`: チャンネルID
+- `message`: 投稿文
+- `display_name`: member_name（自動で末尾に `#member_name` が付与される）
 
 ### Step 4: 結果を返す
 
