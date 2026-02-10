@@ -31,6 +31,7 @@ is_background: false
 | sprint-documenter Skill | `~/.cursor/skills/sprint-documenter/SKILL.md` | ドキュメンテーション視点の振り返り観点 |
 | po-assistant Skill | `~/.cursor/skills/po-assistant/SKILL.md` | PO補佐視点の振り返り観点 |
 | 過去スプリントログ | `{project_root}/.sprint-logs/SPRINT-*.md` | メトリクスのトレンド比較 |
+| KPT履歴 | `{project_root}/kpt-history.md` | 既存KPTパターンの参照・新規KPTの追記先 |
 
 ---
 
@@ -40,6 +41,7 @@ is_background: false
 |--------|------|------|
 | スプリントログ | `{project_root}/.sprint-logs/SPRINT-{連番3桁}.md` | 完成したスプリントログ |
 | Tryストック更新 | `~/.cursor/try-stock.md` | 新規Tryの追加・既存Tryの状態更新 |
+| KPT履歴更新 | `{project_root}/kpt-history.md` | 今スプリントのKPTを横断管理ファイルに追記 |
 
 ---
 
@@ -108,6 +110,16 @@ is_background: false
     │ YAMLフロントマターのmetricsを確定
     │ team配列に今スプリントで稼働したSkillを列挙
     │ .sprint-logs/ ディレクトリに保存
+    │
+    ▼
+[Step 8.5: KPT履歴集約]
+    │ kpt-history.md に今スプリントのKPTを追記
+    │ ・Keep一覧テーブルに行追加（カテゴリ分類付き）
+    │ ・Problem一覧テーブルに行追加（対応状況・対応Try付き）
+    │ ・Try一覧テーブルに行追加（ステータス付き）
+    │ ・既存Problemの対応状況を更新（Tryが完了していれば「解決済み」に）
+    │ ・3スプリント以上のデータがある場合はパターン分析を更新
+    │ ・YAMLフロントマターの集計値を更新
     │
     ▼
 [Step 9: 完了報告]
