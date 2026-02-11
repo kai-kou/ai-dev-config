@@ -168,8 +168,9 @@ Flower 5段階モデル Phase 1（Research）を専門的に担当する役割�
 
 ## 参照ファイル
 
-| ファイル | 用途 | パス |
-|--------|------|------|
-| sprint-workflow.mdc | Flower 5段階モデルの全体フロー | `{project_root}/.cursor/rules/sprint-workflow.mdc` |
-| role-architecture-design.md | ロールアーキテクチャ設計 | `{project_root}/docs/analysis/role-architecture-design.md` |
-| Deepリサーチ結果.md | Flower Phase 1の原典 | `{project_root}/docs/requirements/Deepリサーチ結果.md` Section 3.1 |
+| ファイル | 用途 | パス | 必須 |
+|--------|------|------|------|
+| sprint-workflow.mdc | Flower 5段階モデルの全体フロー | `{project_root}/.cursor/rules/sprint-workflow.mdc` | Yes |
+| プロジェクトドキュメント | 設計書・分析ドキュメント等（存在する場合に参照） | `{project_root}/docs/` | No |
+
+> **注意**: 参照ファイルはプロジェクトごとに異なる。`docs/` 配下にプロジェクト固有の設計書・リサーチ結果がある場合は積極的に参照し、存在しない場合はWeb検索とプロジェクト内コードの調査で代替する。

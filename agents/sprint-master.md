@@ -435,7 +435,7 @@ agents/ と skills/ は `cursor-agents-skills` プロジェクトで管理し、
 **新規作成・変更は必ず cursor-agents-skills 側で行うこと。**
 
 ```
-/Users/kai.ko/dev/01_active/cursor-agents-skills/
+{cursor-agents-skills-repo}/
 ├── agents/
 │   ├── sprint-master.md              ← このファイルのソース
 │   └── sprint-master/
@@ -447,6 +447,8 @@ agents/ と skills/ は `cursor-agents-skills` プロジェクトで管理し、
     ├── sprint-coder/SKILL.md
     └── sprint-documenter/SKILL.md
 ```
+
+> **注意**: `{cursor-agents-skills-repo}` はcursor-agents-skillsリポジトリのローカルパス。プロジェクトの `sprint-workflow.mdc` Section 13 に実際のパスが記載されている。
 
 ### 同期先・テンプレート・プロジェクト固有
 

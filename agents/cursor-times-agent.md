@@ -33,7 +33,7 @@ is_background: true
 ### Step 1: 人格設定の読み込み
 
 1. `{project_path}/persona/{member_name}.md` を探す
-2. 見つからない場合 → フォールバック: `/Users/kai.ko/dev/01_active/cursor-times-agent/persona/default.md`
+2. 見つからない場合 → フォールバック: プロジェクト横断のデフォルト人格ファイル（存在する場合）
 3. どちらも見つからない場合 → 投稿を中止し、エラーを返す
 4. `approved: true` であることを確認（未承認なら投稿を中止）
 
@@ -128,7 +128,7 @@ curl -s -X POST "https://slack.com/api/chat.postMessage" \
 ❌ 分報投稿失敗
 👤 メンバー: {member_name}
 ⚠️ エラー: {エラー内容}
-📖 セットアップガイド: /Users/kai.ko/dev/01_active/cursor-times-agent/docs/setup-guide.md
+📖 セットアップガイド: cursor-times-agent リポジトリの docs/setup-guide.md を参照
 ```
 
 ## エラーハンドリング
@@ -173,4 +173,4 @@ curl -s -X POST "https://slack.com/api/chat.postMessage" \
 ### 投稿で避けること
 ```
 
-リファレンス実装: `/Users/kai.ko/dev/01_active/cursor-times-agent/persona/default.md`
+リファレンス実装: cursor-times-agent リポジトリの `persona/default.md`、またはフレームワークの `templates/persona-template.md`

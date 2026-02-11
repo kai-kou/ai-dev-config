@@ -65,6 +65,17 @@ description: スプリント内のドキュメント作成・更新を担当す�
 [5. 完了報告]
     │ 変更ファイル一覧と概要を報告
     │ 特記事項（設計判断、未解決の参照先）を共有
+    │
+    ▼
+[6. Slack分報投稿]（cursor-times-agent連携・必須）
+    │ cursor-times-agentサブエージェントをバックグラウンドで起動
+    │ パラメータ:
+    │   project_path: プロジェクトルートパス
+    │   member_name: sprint-documenter（※sprint-backlog.mdの担当カラムに従う）
+    │   session_summary: タスクの実施内容・成果・苦労した点・学び
+    │   post_type: task_complete
+    │ ※ persona/{member_name}.md が存在する場合のみ実行
+    │ ※ 詳細は cursor-times-agent.mdc Section 1.1 を参照
     ▼
 タスク完了
 ```
@@ -144,6 +155,7 @@ description: スプリント内のドキュメント作成・更新を担当す�
 | sprint-master | タスク完了時 | 変更ファイル一覧・完了報告 |
 | sprint-coder | 実装後 | コード変更に伴うドキュメント更新 |
 | po-assistant | 設計判断時 | ドキュメント構造の方針確認 |
+| cursor-times-agent | タスク完了時 | Slack分報投稿（member_name: sprint-documenter）。cursor-times-agent.mdc Section 1.1参照 |
 
 ## Phase 1の制限
 

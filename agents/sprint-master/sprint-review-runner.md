@@ -257,7 +257,7 @@ milestones.mdの進捗率を更新する際の基準:
 
 スプリント内で agents/ または skills/ を変更した場合、レビューフェーズで以下を確認する:
 
-- [ ] cursor-agents-skills リポジトリ（`/Users/kai.ko/dev/01_active/cursor-agents-skills/`）に変更が反映されているか
+- [ ] cursor-agents-skills リポジトリ（プロジェクトの `sprint-workflow.mdc` Section 13 に記載のパス）に変更が反映されているか
 - [ ] rsync dry-run で意図しない削除がないか
 - [ ] cursor-agents-skills のコミット&pushの準備ができているか
 
