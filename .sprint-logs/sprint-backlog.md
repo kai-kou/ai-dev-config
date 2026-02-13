@@ -1,6 +1,6 @@
 ---
 sprint:
-  id: "SPRINT-002"
+  id: "SPRINT-003"
   project: "cursor-agents-skills"
   date: "2026-02-13"
   status: "completed"
@@ -8,16 +8,16 @@ sprint:
   autonomous: false
 backlog:
   total_tasks: 3
-  total_sp: 5
+  total_sp: 10
   completed_tasks: 3
-  completed_sp: 5
+  completed_sp: 10
   sp_completion_rate: 100
   waves: 0
 ---
 
 # スプリントバックログ
 
-**スプリント**: SPRINT-002
+**スプリント**: SPRINT-003
 **プロジェクト**: cursor-agents-skills
 **日付**: 2026-02-13
 **ステータス**: completed
@@ -26,57 +26,54 @@ backlog:
 
 ## スプリント目標
 
-> persona/に最新メンバー定義を追加し、slide-generatorのスライド画像出力をサブフォルダ方式に改善して、複数スライドセットの管理と更新を容易にする
+> CursorのチャットSQLite履歴を抽出・分析し、プロジェクト固有のSubagent/Skill/Command/Rule提案を自動生成するchat-history-analyzerのMVPを構築する
 
 ---
 
 ## バックログ
 
-| # | タスクID | タスク名 | SP | 優先度 | 担当 | Wave | 変更予定ファイル | ステータス | 備考 |
-|---|---------|---------|-----|--------|------|------|----------------|-----------|------|
-| 1 | T010 | persona/ 最新メンバー定義の追加 | 2 | P1 | sprint-documenter | − | persona/*.md（7ファイル追加） | ✅ | 環境構築。ai-scrum-frameworkから最新版を移植 |
-| 2 | T011 | slide-generator.md のサブフォルダ方式改修 | 2 | P1 | sprint-coder | − | agents/slide-generator.md | ✅ | 出力構成・Step4・実行例・GDrive構成 |
-| 3 | T012 | google-slides-creator.md のサブフォルダ対応 | 1 | P1 | sprint-coder | − | agents/slide-generator/google-slides-creator.md | ✅ | IMAGE_DIRパス参照の整合性更新 |
+| # | タスクID | タスク名 | SP | 優先度 | 担当 | ステータス | 備考 |
+|---|---------|---------|-----|--------|------|-----------|------|
+| 1 | T013 | workspace_resolver.py + extract_chat_history.py 作成 | 5 | P1 | sprint-coder | ✅ | SQLite BLOB解析含む。抽出の核 |
+| 2 | T014 | chat-history-analyzer Agent定義（オーケストレータ + 3サブAgent） | 3 | P1 | sprint-documenter | ✅ | Agent定義4ファイル |
+| 3 | T015 | /analyze-chat コマンド定義 | 2 | P1 | sprint-documenter | ✅ | コマンドから起動。SKILL.mdも作成 |
 
 ### SP集計
 
 | 項目 | 値 |
 |------|-----|
-| 計画SP合計 | 5 |
-| 完了SP合計 | 5 |
+| 計画SP合計 | 10 |
+| 完了SP合計 | 10 |
 | SP消化率 | 100% |
 | タスク数 | 3 / 3 |
 | 実行モード | 逐次 |
 
 ### 粒度チェック（逐次モード）
 
-- [x] SP合計 ≤ 21（推奨: 5〜13）→ 5 SP
-- [x] タスク数 ≤ 10（推奨: 3〜7）→ 3件
-- [x] 推定所要時間 ≤ 4時間（推奨: 15分〜2時間）→ 約20分
+- [x] SP合計 ≤ 21（推奨: 5〜13）→ 10 ✅
+- [x] タスク数 ≤ 10（推奨: 3〜7）→ 3 ✅
+- [x] 推定所要時間 ≤ 4時間（推奨: 15分〜2時間）→ 約1.5〜2時間
 
 ---
 
 ## 入力元
 
 - **milestones.md**: M1（リポジトリ構造整備・全Agent/Skill登録）
-- **tasks.md**: Phase 1（T010〜T012）
-- **前回Try**: なし（cursor-agents-skills向けPending Tryなし）
+- **tasks.md**: Phase 1 タスク T013〜T015（新規追加）
+- **前回Try**: なし
+- **リサーチ結果**: Cursor SQLite DB構造調査完了。state.vscdb の cursorDiskKV テーブルに composerData/bubbleId として会話データが格納。ワークスペースハッシュは workspaceStorage/<hash>/workspace.json で解決可能
 
 ---
 
 ## スコープ変更記録
 
-> スプリント実行中にPOがスコープを変更した場合の記録。変更がなければ「なし」。
-
-| 時刻 | 変更内容 | 変更前SP | 変更後SP | 理由 |
-|------|---------|---------|---------|------|
-| 2026-02-13 | PO指示でpersona追加タスク(T010)をスコープに追加 | 3 | 5 | 最新メンバー定義をスプリント前に整備する必要 |
+> なし
 
 ---
 
 ## POの承認
 
-- [x] PO承認済み（「OK」で承認）
+- [x] PO承認済み（2026-02-13）
 
 ---
 
@@ -84,25 +81,27 @@ backlog:
 
 ### タスク選定理由
 
-- PO要件: slide-generatorのサブフォルダ改善 + persona最新化
-- M1（リポジトリ構造整備）のスコープ内作業
-- 依存関係なし、独立して消化可能
+- POからの直接要望: チャット履歴分析によるカスタム設定自動提案機能
+- M1（全Agent/Skill登録）の拡張として、新規Agent/Skill/Commandを追加
+- 2スプリント分割のうち Sprint A（MVP）として基盤構築に集中
 
 ### 除外タスク
 
 | タスクID | 除外理由 |
 |---------|---------|
-| T005 | 優先度P2、今回のスプリント目標と異なる |
+| T016（パターン分析強化） | Sprint B に分割。MVP後に実施 |
+| T017（提案テンプレート改善） | Sprint B に分割 |
+| T018（SKILL.md整備） | Sprint B に分割 |
 
 ### Try取り込み判断
 
-- cursor-agents-skills向けPending Tryなし
-- ⚠️ try-stock棚卸し推奨（Pending 28件 > 20件閾値）→ スコープ外
+- try-stock.md 未確認（本プロジェクトに存在しないため）
 
 ### 自己批判結果（Step 5.5）
 
-- Q1（計画の欠点）: SP合計5は推奨下限ちょうど。PO要件がピンポイントなため妥当
-- Q2（依存関係見落とし）: create-slide-outline.mdに隠れた参照がないか再確認済み → 問題なし
-- Q3（SP楽観性）: Markdown定義ファイルの修正のみ。楽観性なし
-- Q4（目標達成可能性）: 3タスクで目標完全達成可能
-- リスク事項: 特になし
+- Q1（計画の欠点）: BLOBデコード方式が未確定。msgpack/JSON/protobuf等を試行する必要あり
+- Q2（依存関係見落とし）: T014はT013の出力フォーマットに依存。T013を先に完了すべき
+- Q3（SP楽観性）: T013のBLOBデコード部分が不確実。SP 5→8に上振れるリスクあり（PO許容済み）
+- Q4（目標達成可能性）: Sprint AでMVP（抽出→分析→提案の一連動作）は達成可能
+- Q5（メンバー視点の懸念解消）: sprint-coder視点でBLOB解析の技術リスクを認識済み
+- リスク事項: CursorバージョンアップでBLOBフォーマットが変更される可能性

@@ -1,16 +1,16 @@
 ---
 tasks:
-  total: 19
-  completed: 11
+  total: 22
+  completed: 14
   in_progress: 0
   blocked: 0
-  overall_progress: 58
+  overall_progress: 64
 ---
 
 # タスク管理
 
 **プロジェクト**: Cursor Agents/Skills GitHub管理（cursor-agents-skills）
-**最終更新**: 2026-02-13
+**最終更新**: 2026-02-13 (SPRINT-003)
 
 ---
 
@@ -34,10 +34,10 @@ tasks:
 
 ## 進捗サマリー
 
-**全体**: 11/19 タスク完了 (58%)
+**全体**: 14/22 タスク完了 (64%)
 
 ### フェーズ別進捗
-- Phase 1（リポジトリ整備）: 11/12 完了 (92%)
+- Phase 1（リポジトリ整備）: 14/15 完了 (93%)
 - Phase 2（ドキュメント整備）: 0/4 完了 (0%)
 - Phase 3（自動化・CI）: 0/3 完了 (0%)
 
@@ -61,6 +61,9 @@ tasks:
 | T010 | persona/ 最新メンバー定義の追加 | P1 | ✅ | 02/13 | SPRINT-002 |
 | T011 | slide-generator.md のサブフォルダ方式改修 | P1 | ✅ | 02/13 | SPRINT-002 |
 | T012 | google-slides-creator.md のサブフォルダ対応 | P1 | ✅ | 02/13 | SPRINT-002 |
+| T013 | workspace_resolver.py + extract_chat_history.py 作成 | P1 | ✅ | 02/13 | SPRINT-003 SP5 |
+| T014 | chat-history-analyzer Agent定義（オーケストレータ + 3サブAgent） | P1 | ✅ | 02/13 | SPRINT-003 SP3 |
+| T015 | /analyze-chat コマンド定義 | P1 | ✅ | 02/13 | SPRINT-003 SP2 |
 
 ---
 
@@ -93,9 +96,9 @@ tasks:
 
 | ID | タスク | 優先度 | 期限 |
 |----|--------|--------|------|
-| T010 | persona/ 最新メンバー定義の追加 | P1 | 02/13 |
-| T011 | slide-generator.md のサブフォルダ方式改修 | P1 | 02/13 |
-| T012 | google-slides-creator.md のサブフォルダ対応 | P1 | 02/13 |
+| T013 | workspace_resolver.py + extract_chat_history.py 作成 | P1 | 02/14 |
+| T014 | chat-history-analyzer Agent定義 | P1 | 02/14 |
+| T015 | /analyze-chat コマンド定義 | P1 | 02/14 |
 
 ---
 
