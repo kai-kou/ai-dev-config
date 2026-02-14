@@ -1,23 +1,23 @@
 ---
 milestones:
   total: 3
-  completed: 0
+  completed: 1
   in_progress: 1
-  overall_progress: 30
+  overall_progress: 44
 ---
 
 # マイルストーン管理
 
 **プロジェクト**: Cursor Agents/Skills GitHub管理（cursor-agents-skills）
-**最終更新**: 2026-02-09
+**最終更新**: 2026-02-13 (SPRINT-005)
 
 ---
 
 ## 全体スケジュール
 
 ```
-【Phase 1: リポジトリ整備】    2026/02 〜 2026/02  🔄
-【Phase 2: ドキュメント整備】  2026/03 〜 2026/03  ⬜
+【Phase 1: リポジトリ整備】    2026/02 〜 2026/02  ✅
+【Phase 2: ドキュメント整備】  2026/03 〜 2026/03  🔄
 【Phase 3: 自動化・CI】       2026/04 〜          ⬜
 ```
 
@@ -27,47 +27,48 @@ milestones:
 
 | マイルストーン | 期限 | ステータス | 進捗率 |
 |--------------|------|-----------|--------|
-| M1: リポジトリ構造整備・全Agent/Skill登録 | 2026-02-28 | 🔄 進行中 | 60% |
-| M2: ドキュメント整備・使用例作成 | 2026-03-31 | ⬜ 未着手 | 0% |
+| M1: リポジトリ構造整備・全Agent/Skill登録 | 2026-02-28 | ✅ 完了 | 100% |
+| M2: ドキュメント整備・使用例作成 | 2026-03-31 | 🔄 進行中 | 33% |
 | M3: 同期スクリプト・CI自動化 | 2026-04-30 | ⬜ 未着手 | 0% |
 
-**全体進捗**: 30%
+**全体進捗**: 44%
 
 ---
 
 ## M1: リポジトリ構造整備・全Agent/Skill登録
 
 **期限**: 2026-02-28
-**ステータス**: 🔄 進行中
+**ステータス**: ✅ 完了（SPRINT-005で完了確認）
 
 ### 完了条件
 - [x] リポジトリ構造確立（agents/, skills/）
 - [x] 既存Agentの登録（6件）
 - [x] 既存Skillの登録（1件）
-- [ ] 全Agent/Skillの棚卸し完了
-- [ ] ~/.cursor/ との差分確認・同期
+- [x] 全Agent/Skillの棚卸し完了（T004 SPRINT-001 + T005 要件定義書で全資産カタログ化）
+- [x] ~/.cursor/ との差分確認・同期（T004 SPRINT-001で実施。rsync運用確立済み）
 
 ### 成果物
-- [x] agents/ ディレクトリ（6 Agent定義）
-- [x] skills/ ディレクトリ（1 Skill定義）
-- [ ] 棚卸しリスト
+- [x] agents/ ディレクトリ（12 Agent定義 + 35 サブエージェント）
+- [x] skills/ ディレクトリ（12 Skill定義）
+- [x] 棚卸しリスト（docs/requirements-cursor-config-git-management.md Section 3 に全資産カタログ）
 
 ---
 
 ## M2: ドキュメント整備・使用例作成
 
 **期限**: 2026-03-31
-**ステータス**: ⬜ 未着手
+**ステータス**: 🔄 進行中
 
 ### 完了条件
 - [ ] 各Agent/Skillの詳細READMEを作成
 - [ ] 使用例・チュートリアルを作成
-- [ ] 新規Agent/Skill作成のコントリビューションガイド
+- [x] 新規Agent/Skill作成のコントリビューションガイド（T103 SPRINT-005）
 
 ### 成果物
 - [ ] Agent/Skill別README
 - [ ] 使用例ドキュメント
-- [ ] CONTRIBUTING.md
+- [x] CONTRIBUTING.md（SPRINT-005 T103）
+- [x] セットアップ手順書（docs/setup-guide.md, SPRINT-005 T104）
 
 ---
 
