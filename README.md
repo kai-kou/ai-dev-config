@@ -9,7 +9,7 @@ project:
   owner: "kai.ko"
   tags: [ai, cursor, claude-code, ruler, agents, skills, commands, rules]
   summary: "Cursor/Claude Codeの設定をRulerで統合管理"
-  next_action: "Ruler運用定着・ツール固有設定の整理"
+  next_action: "Ruler運用定着・スキル追加時のカタログ更新"
 ---
 
 # AI Dev Config
@@ -32,8 +32,8 @@ ai-dev-config/
 │   ├── skills/             # Cursor固有スキル（3個）
 │   └── rules/              # Cursorルール（.mdc形式）
 ├── claude-code/            # Claude Code固有設定
-│   ├── skills/             # Claude Code固有スキル
-│   └── commands/           # Claude Codeコマンド
+│   ├── agents/             # エージェント定義（11個）→ ~/.claude/agents/
+│   └── skills-catalog.md   # スキルカタログ（42個の一覧）
 ├── shared/                 # ツール横断共有リソース
 │   ├── persona/            # ペルソナ定義（9個）
 │   └── docs/               # ドキュメント
@@ -66,16 +66,21 @@ ruler apply --dry-run --verbose
 ### ツール固有設定の同期
 
 ```bash
-# Cursor設定の同期
+# Cursor設定の同期（リポジトリ → ローカル）
 rsync -av cursor/agents/ ~/.cursor/agents/
 rsync -av cursor/commands/ ~/.cursor/commands/
 rsync -av cursor/skills/ ~/.cursor/skills/
 rsync -av cursor/rules/ ~/.cursor/rules/
 
-# Claude Code設定の同期
-rsync -av claude-code/skills/ ~/.claude/skills/
-rsync -av claude-code/commands/ ~/.claude/commands/
+# Claude Code エージェントの同期（リポジトリ → ローカル）
+rsync -av claude-code/agents/ ~/.claude/agents/
+
+# Claude Code エージェントのバックアップ（ローカル → リポジトリ）
+rsync -av ~/.claude/agents/ claude-code/agents/
 ```
+
+**注**: Claude Codeスキル（42個）は `~/.claude/skills/` で直接管理。
+カタログは `claude-code/skills-catalog.md` を参照。
 
 ## Ruler の仕組み
 
@@ -106,8 +111,10 @@ rsync -av claude-code/commands/ ~/.claude/commands/
 
 ### Claude Code固有（claude-code/）
 
-Claude Code固有のスキル・コマンドは `~/.claude/skills/` に直接配置済み（41スキル）。
-このディレクトリはリファレンス・バックアップ用。
+| カテゴリ | 数量 | 説明 |
+|---------|------|------|
+| Agents | 11個 | sprint-master, sprint-planner, sprint-retro 等（`~/.claude/agents/` のバックアップ） |
+| Skills | 42個 | `~/.claude/skills/` で直接管理（カタログは `skills-catalog.md`） |
 
 ## ライセンス
 
