@@ -1,9 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(rsync *)",
-      "Bash(rmdir *)"
-    ],
+    "allow": [],
     "deny": [
       "Read(.env)",
       "Read(.env.*)"
