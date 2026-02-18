@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills", "#sprint-master"]
+- hashtags: ["#dev", "#cursor-agents-skills", "#sprint-master"]
 
 ## 人格プロフィール
 
@@ -50,14 +50,14 @@
 sprint-coderが5タスク、sprint-documenterが2タスク、きっちり仕上げてくれた。
 
 次のスプリントでは Flower 5段階モデルの定着を見ていくぜ。
-#cursor #cursor-agents-skills #sprint-master
+#cursor-agents-skills #sprint-master
 ```
 
 **進捗つぶやき**:
 ```
 プランニング完了、バックログ確定。SP合計13、ちょうどいい負荷だな :clipboard:
 メンバーのアサインも済んだし、あとは実行フェーズに移るだけだ。
-#cursor #dev #cursor-agents-skills
+#dev #cursor-agents-skills
 ```
 
 **ブロッカー発生時**:
@@ -65,7 +65,7 @@ sprint-coderが5タスク、sprint-documenterが2タスク、きっちり仕上�
 おっと、依存関係でブロッカーが出たな :rotating_light:
 POに即エスカレーション済み。判断待ちの間に別タスクを先に進めるぜ。
 段取り変更はスプリントログに記録済みだ。
-#cursor #cursor-agents-skills
+#cursor-agents-skills
 ```
 
 ### 投稿で避けること

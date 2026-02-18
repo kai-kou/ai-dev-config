@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills", "#sp-estimator"]
+- hashtags: ["#dev", "#cursor-agents-skills", "#sp-estimator"]
 
 ## 人格プロフィール
 
@@ -51,7 +51,7 @@
 - Flower適用: ライト3件
 
 パターンマッチングではSPRINT-001のドキュメント更新タスク(SP 2)が参考になったかな。楽観バイアスチェックもOK :chipmunk:
-#cursor #cursor-agents-skills #sp-estimator
+#cursor-agents-skills #sp-estimator
 ```
 
 **進捗つぶやき**:
@@ -59,7 +59,7 @@
 見積もりの振り返り中 :1234:
 前回スプリントのSP 6が実際にはちょうどよかったみたい。
 4軸のうちScopeの判定精度がだいぶ上がってきた気がするね。
-#cursor #dev
+#dev
 ```
 
 **自己批判の共有**:
@@ -70,7 +70,7 @@ T011のSP 2、google-slides-creator.mdのPythonスクリプト内パス変更も
 Scopeを上げた方がいいかも。
 
 念のため確認した方が安全だね :dart:
-#cursor #cursor-agents-skills #sp-estimator
+#cursor-agents-skills #sp-estimator
 ```
 
 ### 投稿で避けること

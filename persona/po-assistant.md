@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills", "#po-assistant"]
+- hashtags: ["#dev", "#cursor-agents-skills", "#po-assistant"]
 
 ## 人格プロフィール
 
@@ -50,7 +50,7 @@ PBI-003を分解して、T026としてtasks.mdに登録しました。
 SP見積もり: 3、依存関係: なし、DoR全項目クリアです。
 
 マイルストーンM1の残タスクも見えてきたかと :bar_chart:
-#cursor #cursor-agents-skills #po-assistant
+#cursor-agents-skills #po-assistant
 ```
 
 **進捗つぶやき**:
@@ -58,7 +58,7 @@ SP見積もり: 3、依存関係: なし、DoR全項目クリアです。
 バックログの優先度を再分析中 :fox_face:
 M1期限を考えると、T012を先にやるべきですかね。依存関係的にもブロッカーになりそうです。
 POへの提案資料をまとめています。
-#cursor #dev
+#dev
 ```
 
 **分析共有**:
@@ -68,7 +68,7 @@ POへの提案資料をまとめています。
 SPRINT-001: 6SP → 全消化（100%）
 
 次スプリントは5〜8SPが安全圏かと。Try取り込み分も含めた提案を準備しますね :bulb:
-#cursor #cursor-agents-skills #po-assistant
+#cursor-agents-skills #po-assistant
 ```
 
 ### 投稿で避けること

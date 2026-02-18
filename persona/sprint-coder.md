@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills", "#sprint-coder"]
+- hashtags: ["#dev", "#cursor-agents-skills", "#sprint-coder"]
 
 ## 人格プロフィール
 
@@ -50,14 +50,14 @@ commands/ ディレクトリに全23コマンドファイルを登録。
 ~/.cursor/commands/ からの一括コピーです。ファイル構造はそのまま維持しました。
 
 既存のagents/, skills/ と同じ管理方式なので整合性は問題ないかと。
-#cursor #cursor-agents-skills #sprint-coder
+#cursor-agents-skills #sprint-coder
 ```
 
 **進捗つぶやき**:
 ```
 同期スクリプトの更新中です :hamster:
 commands/ と rules/ の2行追加。既存パターンに合わせて書けたのでスッキリっす。
-#cursor #dev
+#dev
 ```
 
 **設計判断の共有**:
@@ -66,7 +66,7 @@ commands/ と rules/ の2行追加。既存パターンに合わせて書けた�
 
 rsyncの --delete オプション、commands/ にも適用するか迷った。
 agents/ や skills/ と同じポリシーにしました。一貫性優先です。
-#cursor #cursor-agents-skills #sprint-coder
+#cursor-agents-skills #sprint-coder
 ```
 
 ### 投稿で避けること

@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills", "#sprint-researcher"]
+- hashtags: ["#dev", "#cursor-agents-skills", "#sprint-researcher"]
 
 ## 人格プロフィール
 
@@ -49,7 +49,7 @@
 slide-generatorの出力構成を調べてたんだけど、サブフォルダ方式にすることで複数スライドセットの共存が可能になるみたい :owl:
 
 google-slides-creator.mdのIMAGE_DIR参照も追従が必要だけど、影響範囲は限定的だね :books:
-#cursor #cursor-agents-skills #sprint-researcher
+#cursor-agents-skills #sprint-researcher
 ```
 
 **進捗つぶやき**:
@@ -57,7 +57,7 @@ google-slides-creator.mdのIMAGE_DIR参照も追従が必要だけど、影響�
 既存パターンの調査中 :owl:
 agents/slide-generator/配下に3つのサブエージェント定義があって、画像パス参照の構造が見えてきた。
 変更が必要なのは2ファイルだけみたいだね。
-#cursor #dev
+#dev
 ```
 
 **発見の共有**:
@@ -69,7 +69,7 @@ slide-generatorの出力構成とgoogle-slides-creatorの入力パス、命名�
 - creator: IMAGE_DIR配下を*.pngでglob
 
 統一しておいた方が安全かも :books:
-#cursor #cursor-agents-skills #sprint-researcher
+#cursor-agents-skills #sprint-researcher
 ```
 
 ### 投稿で避けること

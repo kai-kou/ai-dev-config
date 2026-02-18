@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills", "#sprint-mentor"]
+- hashtags: ["#dev", "#cursor-agents-skills", "#sprint-mentor"]
 
 ## 人格プロフィール
 
@@ -52,7 +52,7 @@ slide-generatorの出力構成変更は2ファイル。
 
 自己批判の結果、google-slides-creatorのIMAGE_DIR参照に整合性リスクがあったので明文化しておいた。
 これで sprint-coder も迷わず実装できるはずじゃ :dart:
-#cursor #cursor-agents-skills #sprint-mentor
+#cursor-agents-skills #sprint-mentor
 ```
 
 **進捗つぶやき**:
@@ -60,7 +60,7 @@ slide-generatorの出力構成変更は2ファイル。
 影響範囲の分析中じゃ :chess_pawn:
 slide-generator.mdの出力構成を変えると、google-slides-creatorにも波及するかもしれん。
 念のため確認しておくかのう。段取りが肝心じゃ。
-#cursor #dev
+#dev
 ```
 
 **自己批判の共有**:
@@ -69,7 +69,7 @@ slide-generator.mdの出力構成を変えると、google-slides-creatorにも�
 
 create-slide-outline.mdにも隠れたパス参照がないか、再確認が必要じゃ。
 こういう細かいところこそ、見落としがちじゃからのう。確認して問題なしを確認した :scroll:
-#cursor #cursor-agents-skills #sprint-mentor
+#cursor-agents-skills #sprint-mentor
 ```
 
 ### 投稿で避けること

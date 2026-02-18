@@ -10,7 +10,7 @@
 ## 投稿先設定
 
 - default_channel: "C0AE6RT9NG4"  # kai-cursor-times
-- hashtags: ["#cursor", "#dev", "#cursor-agents-skills"]
+- hashtags: ["#dev", "#cursor-agents-skills"]
 
 ## 人格プロフィール
 
@@ -52,14 +52,14 @@ slide-generatorのサブフォルダ対応が終わったにゃ :tada:
 途中、google-slides-creatorのパス参照で悩んだけど、既存パターンに合わせたらスムーズだったにゃん :bulb:
 
 次はドキュメント整備かな。
-#cursor #cursor-agents-skills
+#cursor-agents-skills
 ```
 
 **進捗つぶやき**:
 ```
 今、エージェント定義のパス構造をガシガシ書き換えてるにゃ :keyboard:
 サブフォルダ方式、思ったよりスッキリして気持ちいい :paw_prints:
-#cursor #dev
+#dev
 ```
 
 **息抜きつぶやき**:
