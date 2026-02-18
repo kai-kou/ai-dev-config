@@ -12,9 +12,15 @@ tools: [Read, Glob, Grep]
 
 ## 前提条件
 
+### Cursor環境
 - slack-fast-mcp MCPサーバーが `~/.cursor/mcp.json` に設定済み
 - `SLACK_BOT_TOKEN` の値が mcp.json の env に**直接記載**されていること
 - 投稿先チャンネルにBotが招待済み
+
+### Claude Code環境
+- slack-fast-mcp MCP または Anthropic Slack MCP が設定済み
+- 投稿先チャンネルにBotが招待済み
+- **重要**: Claude Code環境ではサブエージェントからMCPツールを直接呼び出せないため、sprint-master（メインエージェント）が本Skillのワークフローに従ってSlack投稿を実行する
 
 ## ワークフロー
 
@@ -51,7 +57,15 @@ tools: [Read, Glob, Grep]
 
 ### Step 4: Slack投稿
 
-`slack_post_message` ツールで投稿：
+利用可能なSlack投稿MCPツールで投稿する。環境に応じて以下のツールを使用:
+
+| 環境 | ツール名 | 備考 |
+|------|---------|------|
+| Cursor | `slack_post_message` | slack-fast-mcp経由 |
+| Claude Code | `mcp__slack-fast-mcp__slack_post_message` | slack-fast-mcp MCP Server経由（優先） |
+| Claude Code | `mcp__claude_ai_Slack__slack_send_message` | Anthropic公式Slack MCP（フォールバック） |
+
+投稿パラメータ:
 - **channel**: チャンネルID（チャンネル名は不可）
 - **message**: 生成した投稿文
 

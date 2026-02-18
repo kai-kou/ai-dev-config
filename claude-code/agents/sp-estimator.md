@@ -1,6 +1,6 @@
 ---
 name: sp-estimator
-description: タスクのストーリーポイント（SP）見積もりを実行するSkill。4軸評価（複雑度・スコープ・不確実性・PO依存度）に基づきSP値を算出する。プランニング・リファインメント時に「SP見積もり」「ストーリーポイント」「見積もり」と言われたら使用。
+description: タスクのストーリーポイント（SP）見積もりを実行するSkill。story-point-guide.mdcの4軸評価に基づき、タスクの複雑度・スコープ・不確実性・PO依存度を分析してSP値を算出する。プランニング・リファインメント時に使用。
 model: haiku
 maxTurns: 10
 tools: [Read, Glob, Grep]

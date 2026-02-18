@@ -9,7 +9,7 @@ project:
   owner: "kai.ko"
   tags: [ai, cursor, claude-code, ruler, agents, skills, commands, rules]
   summary: "Cursor/Claude Codeの設定をRulerで統合管理"
-  next_action: "Ruler運用定着・スキル追加時のカタログ更新"
+  next_action: "sync-home.sh運用定着・スキル同期対象の拡張検討"
 ---
 
 # AI Dev Config
@@ -26,6 +26,8 @@ ai-dev-config/
 │   ├── regression-prevention.md  # デグレ防止ルール
 │   ├── skills/             # 共有スキル（各ツールにコピー）
 │   └── ruler.toml          # Ruler設定
+├── scripts/                # 運用スクリプト
+│   └── sync-home.sh        # ~/.claude との双方向同期
 ├── cursor/                 # Cursor固有設定
 │   ├── agents/             # サブエージェント定義（11個）
 │   ├── commands/           # スラッシュコマンド（19個）
@@ -63,24 +65,35 @@ ruler apply --agents cursor
 ruler apply --dry-run --verbose
 ```
 
-### ツール固有設定の同期
+### Claude Code エージェントの同期
+
+`scripts/sync-home.sh` で `claude-code/agents/` と `~/.claude/agents/` を双方向同期する。
 
 ```bash
-# Cursor設定の同期（リポジトリ → ローカル）
-rsync -av cursor/agents/ ~/.cursor/agents/
-rsync -av cursor/commands/ ~/.cursor/commands/
-rsync -av cursor/skills/ ~/.cursor/skills/
-rsync -av cursor/rules/ ~/.cursor/rules/
+# 差分確認（変更なし）
+./scripts/sync-home.sh diff
 
-# Claude Code エージェントの同期（リポジトリ → ローカル）
-rsync -av claude-code/agents/ ~/.claude/agents/
+# Pull: ~/.claude → リポジトリ（スプリント後の逆同期）
+./scripts/sync-home.sh pull
 
-# Claude Code エージェントのバックアップ（ローカル → リポジトリ）
-rsync -av ~/.claude/agents/ claude-code/agents/
+# Push: リポジトリ → ~/.claude（デプロイ）
+./scripts/sync-home.sh push
+
+# ruler apply + Push 一括実行
+./scripts/sync-home.sh apply
 ```
 
 **注**: Claude Codeスキル（42個）は `~/.claude/skills/` で直接管理。
 カタログは `claude-code/skills-catalog.md` を参照。
+
+### Cursor設定の同期
+
+```bash
+rsync -av cursor/agents/ ~/.cursor/agents/
+rsync -av cursor/commands/ ~/.cursor/commands/
+rsync -av cursor/skills/ ~/.cursor/skills/
+rsync -av cursor/rules/ ~/.cursor/rules/
+```
 
 ## Ruler の仕組み
 
@@ -90,6 +103,7 @@ rsync -av ~/.claude/agents/ claude-code/agents/
    - Cursor: `AGENTS.md`
 3. 生成物は `.gitignore` で除外（ソースのみバージョン管理）
 4. `.ruler/skills/` に共有スキルを置くと、各ツールの skills ディレクトリに自動コピー
+5. Rulerが管理しない領域（agents等）は `scripts/sync-home.sh` で補完
 
 ## 含まれるコンテンツ
 

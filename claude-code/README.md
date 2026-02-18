@@ -21,12 +21,29 @@ claude-code/
 
 ## 同期手順
 
-```bash
-# エージェント定義を同期
-rsync -av claude-code/agents/ ~/.claude/agents/
+プロジェクトルートの `scripts/sync-home.sh` で双方向同期を管理する。
 
-# 逆方向: デプロイ済み→リポジトリへバックアップ
-rsync -av ~/.claude/agents/ claude-code/agents/
+```bash
+# 差分確認
+./scripts/sync-home.sh diff
+
+# Pull: ~/.claude/agents/ → claude-code/agents/（スプリント後の逆同期）
+./scripts/sync-home.sh pull
+
+# Push: claude-code/agents/ → ~/.claude/agents/（デプロイ）
+./scripts/sync-home.sh push
+
+# ruler apply + Push 一括実行
+./scripts/sync-home.sh apply
+```
+
+### 運用フロー
+
+```
+スプリント中に ~/.claude/agents/ が改善される
+  → スプリント終了後: ./scripts/sync-home.sh pull（逆同期）
+  → コミット & push
+  → 次回デプロイ時: ./scripts/sync-home.sh apply（ruler + push）
 ```
 
 ## スキルについて

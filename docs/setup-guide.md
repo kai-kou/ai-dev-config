@@ -1,7 +1,7 @@
 # セットアップ手順書
 
-**プロジェクト**: cursor-agents-skills
-**最終更新**: 2026-02-13（SPRINT-005 T104）
+**プロジェクト**: ai-dev-config
+**最終更新**: 2026-02-18
 
 ---
 
@@ -12,7 +12,10 @@
 | OS | macOS / Linux |
 | Git | 2.x以上 |
 | rsync | インストール済み（macOS標準搭載） |
-| Cursor IDE | インストール済み |
+| Node.js | 22+（Ruler CLI用） |
+| Ruler | `npm install -g @intellectronica/ruler` |
+| Cursor IDE | インストール済み（Cursor設定の同期に必要） |
+| Claude Code | インストール済み（Claude Code設定の同期に必要） |
 | GitHub | SSHキー設定済み、リポジトリへのアクセス権あり |
 
 ---
@@ -21,39 +24,88 @@
 
 ```bash
 # 推奨配置先
-git clone git@github.com:kai-kou/cursor-agents-skills.git ~/dev/01_active/cursor-agents-skills
+git clone git@github.com:kai-kou/ai-dev-config.git ~/dev/01_active/ai-dev-config
 
 # 任意の配置先でもOK
-git clone git@github.com:kai-kou/cursor-agents-skills.git /path/to/your/preferred/location
+git clone git@github.com:kai-kou/ai-dev-config.git /path/to/your/preferred/location
 ```
 
 **確認**:
 ```bash
-cd ~/dev/01_active/cursor-agents-skills
+cd ~/dev/01_active/ai-dev-config
 ls
-# agents/  commands/  docs/  milestones.md  persona/  README.md  rules/  skills/  tasks.md
+# claude-code/  cursor/  docs/  persona/  scripts/  README.md  ...
 ```
 
 ---
 
-## 2. ~/.cursor/ への同期
+## 2. Ruler によるルール生成
 
-### 2.1 同期前の差分確認（dry-run）
+```bash
+cd ~/dev/01_active/ai-dev-config
+
+# Claude Code + Cursor 向けにルール生成
+ruler apply
+
+# dry-run で確認
+ruler apply --dry-run --verbose
+```
+
+---
+
+## 3. Claude Code エージェントの同期
+
+`scripts/sync-home.sh` で `claude-code/agents/` と `~/.claude/agents/` を双方向同期する。
+
+### 3.1 差分確認
+
+```bash
+./scripts/sync-home.sh diff
+```
+
+### 3.2 同期コマンド
+
+```bash
+# Push: リポジトリ → ~/.claude（初回セットアップ・デプロイ時）
+./scripts/sync-home.sh push
+
+# Pull: ~/.claude → リポジトリ（スプリント後の逆同期）
+./scripts/sync-home.sh pull
+
+# ruler apply + Push 一括実行
+./scripts/sync-home.sh apply
+```
+
+各コマンドは実行前に dry-run プレビューを表示し、確認プロンプトで承認後に実行される。
+
+### 3.3 同期対象一覧
+
+| リポジトリ側 | デプロイ先 | 内容 |
+|-------------|-----------|------|
+| `claude-code/agents/` | `~/.claude/agents/` | エージェント定義（11個） |
+
+> **注意**: Claude Code スキル（42個）は `~/.claude/skills/` で直接管理。カタログは `claude-code/skills-catalog.md` を参照。
+
+---
+
+## 4. ~/.cursor/ への同期
+
+### 4.1 同期前の差分確認（dry-run）
 
 **必ず dry-run で差分を確認してから実行してください。**
 
 ```bash
 # agents の差分確認
-rsync -avn --delete ~/dev/01_active/cursor-agents-skills/agents/ ~/.cursor/agents/
+rsync -avn --delete ~/dev/01_active/ai-dev-config/cursor/agents/ ~/.cursor/agents/
 
 # skills の差分確認
-rsync -avn --delete ~/dev/01_active/cursor-agents-skills/skills/ ~/.cursor/skills/
+rsync -avn --delete ~/dev/01_active/ai-dev-config/cursor/skills/ ~/.cursor/skills/
 
 # commands の差分確認
-rsync -avn --delete ~/dev/01_active/cursor-agents-skills/commands/ ~/.cursor/commands/
+rsync -avn --delete ~/dev/01_active/ai-dev-config/cursor/commands/ ~/.cursor/commands/
 
 # rules の差分確認（グローバルルール）
-rsync -avn --delete ~/dev/01_active/cursor-agents-skills/rules/ ~/.cursor/rules/
+rsync -avn --delete ~/dev/01_active/ai-dev-config/cursor/rules/ ~/.cursor/rules/
 ```
 
 **出力の読み方**:
@@ -61,70 +113,50 @@ rsync -avn --delete ~/dev/01_active/cursor-agents-skills/rules/ ~/.cursor/rules/
 - `>f..t......` — 更新されるファイル
 - `*deleting` — 削除されるファイル ⚠️ 要注意
 
-### 2.2 同期の実行
+### 4.2 同期の実行
 
 差分を確認して問題なければ、`n` を外して実行します。
 
 ```bash
-# agents 同期
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/agents/ ~/.cursor/agents/
-
-# skills 同期
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/skills/ ~/.cursor/skills/
-
-# commands 同期
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/commands/ ~/.cursor/commands/
-
-# rules 同期（グローバルルール）
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/rules/ ~/.cursor/rules/
+rsync -av --delete ~/dev/01_active/ai-dev-config/cursor/agents/ ~/.cursor/agents/
+rsync -av --delete ~/dev/01_active/ai-dev-config/cursor/skills/ ~/.cursor/skills/
+rsync -av --delete ~/dev/01_active/ai-dev-config/cursor/commands/ ~/.cursor/commands/
+rsync -av --delete ~/dev/01_active/ai-dev-config/cursor/rules/ ~/.cursor/rules/
 ```
 
-### 2.3 同期対象一覧
+### 4.3 同期対象一覧
 
 | リポジトリ側 | ~/.cursor/ 側 | 内容 |
 |-------------|--------------|------|
-| `agents/` | `~/.cursor/agents/` | サブエージェント定義 |
-| `skills/` | `~/.cursor/skills/` | スキル定義 |
-| `commands/` | `~/.cursor/commands/` | スラッシュコマンド定義 |
-| `rules/` | `~/.cursor/rules/` | グローバルルール |
+| `cursor/agents/` | `~/.cursor/agents/` | サブエージェント定義 |
+| `cursor/skills/` | `~/.cursor/skills/` | スキル定義 |
+| `cursor/commands/` | `~/.cursor/commands/` | スラッシュコマンド定義 |
+| `cursor/rules/` | `~/.cursor/rules/` | グローバルルール |
 
-> **注意**: `persona/` は `~/.cursor/` への同期対象外です。プロジェクト固有設定のため、リポジトリ内でのみ使用されます。
+> **注意**: `persona/` は同期対象外です。プロジェクト固有設定のため、リポジトリ内でのみ使用されます。
 
 ---
 
-## 3. 同期の検証
+## 5. 同期の検証
 
-### 3.1 ファイル数の確認
+### 5.1 Claude Code の検証
 
 ```bash
-# リポジトリ側のファイル数
-echo "=== リポジトリ ==="
-echo -n "agents: "; find ~/dev/01_active/cursor-agents-skills/agents -type f | wc -l
-echo -n "skills: "; find ~/dev/01_active/cursor-agents-skills/skills -type f | wc -l
-echo -n "commands: "; find ~/dev/01_active/cursor-agents-skills/commands -type f | wc -l
-echo -n "rules: "; find ~/dev/01_active/cursor-agents-skills/rules -type f | wc -l
-
-# ~/.cursor/ 側のファイル数
-echo "=== ~/.cursor ==="
-echo -n "agents: "; find ~/.cursor/agents -type f | wc -l
-echo -n "skills: "; find ~/.cursor/skills -type f | wc -l
-echo -n "commands: "; find ~/.cursor/commands -type f | wc -l
-echo -n "rules: "; find ~/.cursor/rules -type f | wc -l
+# 差分がないことを確認（出力が「全ファイル一致」なら成功）
+./scripts/sync-home.sh diff
 ```
 
-両者のファイル数が一致していれば同期成功です。
-
-### 3.2 差分がないことの確認
+### 5.2 Cursor のファイル数確認
 
 ```bash
 # 差分チェック（出力がなければ同期完了）
-diff -rq ~/dev/01_active/cursor-agents-skills/agents/ ~/.cursor/agents/
-diff -rq ~/dev/01_active/cursor-agents-skills/skills/ ~/.cursor/skills/
-diff -rq ~/dev/01_active/cursor-agents-skills/commands/ ~/.cursor/commands/
-diff -rq ~/dev/01_active/cursor-agents-skills/rules/ ~/.cursor/rules/
+diff -rq ~/dev/01_active/ai-dev-config/cursor/agents/ ~/.cursor/agents/
+diff -rq ~/dev/01_active/ai-dev-config/cursor/skills/ ~/.cursor/skills/
+diff -rq ~/dev/01_active/ai-dev-config/cursor/commands/ ~/.cursor/commands/
+diff -rq ~/dev/01_active/ai-dev-config/cursor/rules/ ~/.cursor/rules/
 ```
 
-### 3.3 Cursor IDEでの確認
+### 5.3 Cursor IDEでの確認
 
 1. Cursor IDE を再起動（または設定のリロード）
 2. チャットで `/` を入力し、同期したコマンドが表示されることを確認
@@ -132,44 +164,54 @@ diff -rq ~/dev/01_active/cursor-agents-skills/rules/ ~/.cursor/rules/
 
 ---
 
-## 4. 日常的な運用フロー
+## 6. 日常的な運用フロー
 
-### 4.1 設定を変更する場合
+### 6.1 Claude Code エージェントの変更サイクル
 
 ```
-1. リポジトリ内のファイルを編集
+スプリント中に ~/.claude/agents/ が改善される
+  → スプリント終了後: ./scripts/sync-home.sh pull（逆同期）
+  → git add / commit / push
+  → 次回デプロイ時: ./scripts/sync-home.sh apply（ruler + push）
+```
+
+### 6.2 Cursor 設定を変更する場合
+
+```
+1. リポジトリ内の cursor/ 配下を編集
 2. git add / commit / push
 3. rsync で ~/.cursor/ に同期
 ```
 
 > **重要**: `~/.cursor/` 側を直接編集しないでください。次回の rsync `--delete` 実行時に変更が消えます。
 
-### 4.2 スプリント運用時
+### 6.3 スプリント運用時
 
 スプリント完了時に Cursor から同期確認が提示されます（`sync-to-cursor-home.mdc` ルールによる自動確認）。
 
-```
-🔄 ~/.cursor/ への同期が必要です。同期スクリプトを実行しますか？
-```
-
-承認すると、dry-run → 確認 → 実行 の流れで同期されます。
-
-### 4.3 他のマシンに設定を適用する場合
+### 6.4 他のマシンに設定を適用する場合
 
 ```bash
 # 新しいマシンで
-git clone git@github.com:kai-kou/cursor-agents-skills.git ~/dev/01_active/cursor-agents-skills
+git clone git@github.com:kai-kou/ai-dev-config.git ~/dev/01_active/ai-dev-config
+cd ~/dev/01_active/ai-dev-config
 
-# 同期実行（Section 2 と同じ手順）
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/agents/ ~/.cursor/agents/
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/skills/ ~/.cursor/skills/
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/commands/ ~/.cursor/commands/
-rsync -av --delete ~/dev/01_active/cursor-agents-skills/rules/ ~/.cursor/rules/
+# Ruler でルール生成
+ruler apply
+
+# Claude Code エージェントをデプロイ
+./scripts/sync-home.sh push
+
+# Cursor 設定を同期
+rsync -av --delete cursor/agents/ ~/.cursor/agents/
+rsync -av --delete cursor/skills/ ~/.cursor/skills/
+rsync -av --delete cursor/commands/ ~/.cursor/commands/
+rsync -av --delete cursor/rules/ ~/.cursor/rules/
 ```
 
 ---
 
-## 5. トラブルシューティング
+## 7. トラブルシューティング
 
 ### Q: rsync で "Permission denied" が出る
 
@@ -216,7 +258,7 @@ Cursor IDE をインストール・起動すると自動的に作成されます
 
 ---
 
-## 6. 同期対象外のファイルについて
+## 8. 同期対象外のファイルについて
 
 以下のファイル/ディレクトリは意図的に同期対象外としています。
 

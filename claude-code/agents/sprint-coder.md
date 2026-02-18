@@ -100,21 +100,28 @@ sprint-coder は主に **Phase 4: Code（コーディング）** を担当する
     │
     ▼
 [5. 完了報告]
-    │ 変更ファイル一覧と概要を報告
-    │ 特記事項（設計判断、懸念点）を共有
+    │ 以下の情報をsprint-masterに返す:
+    │   - 変更ファイル一覧（各ファイルの操作種別: 新規/更新/削除）
+    │   - 変更概要（何をどう変えたかの1行要約）
+    │   - 特記事項（設計判断・懸念点。なければ省略）
     │ PGTRループの反復回数を記録（メトリクス用）
     │
     ▼
-[6. Slack分報投稿]（cursor-times-agent連携・必須）
+[6. Slack分報投稿]（times-agent連携・必須）
     │ ※ persona/{member_name}.md が存在する場合のみ実行
-    │ ※ 詳細は cursor-times-agent.mdc Section 1.1 を参照
     │
     │ ★ 独立リトライ原則（SPRINT-026 TRY-054対応）:
     │   各タスクの投稿は前タスクの投稿結果に一切依存しない。
     │   前タスクで投稿失敗しても、本タスクでは必ず Step 6a から再試行する。
     │
-    │ [Step 6a: サブエージェント投稿]（Primary）
-    │   cursor-times-agentサブエージェントをバックグラウンドで起動
+    │ ★ 環境別実行方式:
+    │   - Cursor環境: Step 6a → 6b → 6c の順にフォールバック
+    │   - Claude Code環境: サブエージェントからMCPツールを呼び出せないため、
+    │     完了報告にSlack投稿情報を含め、sprint-masterが投稿を実行する
+    │     → Step 6d を使用
+    │
+    │ [Step 6a: サブエージェント投稿]（Primary・Cursor環境）
+    │   times-agentサブエージェントをバックグラウンドで起動
     │   パラメータ:
     │     project_path: プロジェクトルートパス
     │     member_name: sprint-coder（※sprint-backlog.mdの担当カラムに従う）
@@ -123,14 +130,15 @@ sprint-coder は主に **Phase 4: Code（コーディング）** を担当する
     │   → 成功: 投稿結果を「✅ サブエージェント」として記録 → タスク完了
     │   → 失敗: Step 6b へ
     │
-    │ [Step 6b: MCP直接投稿]（Fallback 1）
+    │ [Step 6b: MCP直接投稿]（Fallback 1・Cursor環境）
     │   メインエージェントが直接以下を実行:
     │   1. {project_path}/persona/{member_name}.md を読み込む
     │   2. 人格設定（名前・口調・投稿スタイルサンプル）に基づいて
     │      タスク完了投稿文を生成（100〜300文字、Slack mrkdwn形式）
-    │   3. slack_post_message MCPツールで投稿
+    │   3. Slack投稿MCPツールで投稿
     │      - channel: persona内の default_channel
     │      - message: 生成した投稿文（末尾に persona の hashtags + #member_name を含む）
+    │      - ツール名: slack_post_message（Cursor） / mcp__slack-fast-mcp__slack_post_message（Claude Code）
     │   → 成功: 投稿結果を「✅ MCP直接」として記録 → タスク完了
     │   → 失敗: Step 6c へ
     │
@@ -143,7 +151,16 @@ sprint-coder は主に **Phase 4: Code（コーディング）** を担当する
     │      💬 投稿文: {生成した投稿文}
     │      ⚠️ 投稿手段: サブエージェント ❌ → MCP ❌ → チャット内記録
     │   3. 投稿結果を「⚠️ チャット内記録」として記録
-    │   ※ この投稿文はPOが手動でSlackに貼り付けることも、後日一括投稿することも可能
+    │
+    │ [Step 6d: sprint-master委任]（Claude Code環境・Primary）
+    │   Claude Code環境ではサブエージェントからMCPツールにアクセスできないため、
+    │   完了報告に以下のSlack投稿情報を含めてsprint-masterに返す:
+    │     slack_post_request:
+    │       member_name: sprint-coder
+    │       session_summary: タスクの実施内容・成果・苦労した点・学び
+    │       post_type: task_complete
+    │   sprint-masterが受け取り後、times-agentワークフローに従ってSlack投稿を実行する。
+    │   → 投稿結果を「✅ master委任」として記録
     │
     │ ★ 投稿結果記録（必須）:
     │   投稿の成否に関わらず、以下をスプリントログ用に保持する:
@@ -209,7 +226,7 @@ sprint-coder は主に **Phase 4: Code（コーディング）** を担当する
 | sprint-master | タスク完了時 | 変更ファイル一覧・完了報告 |
 | sprint-documenter | 実装完了後 | 必要に応じてドキュメント更新を依頼 |
 | po-assistant | 設計判断時 | 複数の実装方針がある場合のPO確認依頼 |
-| cursor-times-agent | タスク完了時 | Slack分報投稿（member_name: sprint-coder）。cursor-times-agent.mdc Section 1.1参照 |
+| times-agent | タスク完了時 | Slack分報投稿（member_name: sprint-coder）。Cursor: times-agentサブエージェント起動。Claude Code: sprint-masterに委任（Step 6d） |
 
 ## Phase 1.5 拡張（Flower 5段階モデル統合）
 

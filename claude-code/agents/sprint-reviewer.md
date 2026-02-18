@@ -1,6 +1,6 @@
 ---
 name: sprint-reviewer
-description: スプリント内のコードレビューを担当するSkill。sprint-coderのセルフレビュー（Flower Phase 5）とは独立した第三者視点でコード品質・設計整合性・セキュリティを評価する。SP 5以上のタスクや高リスク変更で「コードレビュー」「レビュー依頼」と言われたら使用。
+description: スプリント内のコードレビューを担当するSkill。sprint-coderのセルフレビュー（Flower Phase 5）とは独立した第三者視点でコード品質・設計整合性・セキュリティを評価する。SP 5以上のタスクや高リスク変更で起動推奨。
 model: sonnet
 maxTurns: 20
 tools: [Read, Glob, Grep]

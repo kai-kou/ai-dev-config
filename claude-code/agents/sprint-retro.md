@@ -141,20 +141,43 @@ memory: user
     │   判定: 前スプリント以上 → ✅ / 微減（-10%以内）→ ⚠️ / 大幅減（-10%超）→ ❌
     │         ※自律実行モードのタスクは全てautonomousとしてカウント
     │
-    │ ■ 指標4: セッション有効稼働率（session_effective_rate）
-    │   測定方法: セッション全体の時間配分を概算で評価する
-    │   分類:
-    │     ・有効作業時間 = タスク実行時間 + レビュー即座対応時間
-    │     ・オーバーヘッド = プランニング + レビュー + レトロスペクティブ + PO待ち時間
-    │   計算式: 有効作業時間 / (有効作業時間 + オーバーヘッド) × 100（%）
-    │   概算ガイド（正確な時間計測が困難な場合）:
-    │     95%: タスク実行が大半。PO待ちなし。レビュー/レトロがスムーズ
-    │     85%: 通常のスプリント。適度なPO対話あり
-    │     75%: プランニングに時間を要した。PO確認が複数回
-    │     65%: スコープ変更あり。方針変更による手戻り
-    │     50%以下: 大規模なブロッカーや方針転換が発生
+    │ ■ 指標4: セッション有効稼働率（session_effective_rate）★ SPRINT-050更新
+    │   測定方法: sprint-backlog.md の timing セクションから実測値を算出する
+    │   データソース: sprint-backlog.md の timing フィールド
+    │     ・planning_start / planning_end → planning_minutes
+    │     ・execution_start / execution_end → execution_minutes
+    │     ・review_start / review_end → review_minutes
+    │     ・retro_start / retro_end → retro_minutes
+    │     ・session_duration_minutes = sprint-log.md の session_end - session_start（分換算）
+    │   計算式: execution_minutes / session_duration_minutes × 100（%）
+    │   フォールバック（timing未記録の場合）: 概算ガイドを適用
+    │     95%: タスク実行が大半。PO待ちなし
+    │     85%: 通常のスプリント
+    │     75%: プランニングに時間を要した
+    │     65%: スコープ変更あり
+    │     50%以下: 大規模なブロッカー発生
     │   目標: 70%以上
     │   判定: ≥70% → ✅ / 50〜69% → ⚠️ / <50% → ❌
+    │   記録先: sprint-log.md YAML metrics.session_effective_rate + Section 6.1/6.2
+    │
+    │ ■ 指標4a: フェーズ別所要時間（phase_duration）★ SPRINT-050 追加（PBI-032）
+    │   測定方法: sprint-backlog.md の timing セクションから各フェーズの所要時間を算出
+    │   計算:
+    │     ・planning_minutes = planning_end - planning_start
+    │     ・execution_minutes = execution_end - execution_start
+    │     ・review_minutes = review_end - review_start
+    │     ・retro_minutes = retro_end - retro_start
+    │   記録先: sprint-log.md YAML metrics.phase_duration + Section 6.1
+    │   分析: フェーズ別割合を算出し、CW予算配分（Section 7.2）との比較に使用
+    │
+    │ ■ 指標4b: SP効率指標（minutes_per_sp）★ SPRINT-050 追加（PBI-032）
+    │   測定方法: セッション全体の所要時間とSPから効率を算出
+    │   計算:
+    │     ・分/SP（全体）= session_duration_minutes / completed_sp
+    │     ・分/SP（実行のみ）= execution_minutes / completed_sp
+    │   記録先: sprint-log.md YAML metrics.efficiency.minutes_per_sp + Section 6.2
+    │   分析: 直近3スプリントのトレンドと比較し、効率改善/悪化を評価
+    │   ※ completed_sp が 0 の場合は 0 として記録（ゼロ除算回避）
     │
     │ ■ 指標5: デグレ発生
     │   測定方法: スプリント中にregression-guardまたはレビューで検出されたデグレの有無
