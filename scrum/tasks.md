@@ -1,16 +1,16 @@
 ---
 tasks:
   total: 38
-  completed: 25
+  completed: 27
   in_progress: 0
   blocked: 0
-  overall_progress: 66
+  overall_progress: 71
 ---
 
 # タスク管理
 
 **プロジェクト**: Cursor Agents/Skills GitHub管理（cursor-agents-skills）
-**最終更新**: 2026-02-18
+**最終更新**: 2026-02-19
 
 ---
 
@@ -34,13 +34,13 @@ tasks:
 
 ## 進捗サマリー
 
-**全体**: 25/38 タスク完了 (66%)
+**全体**: 27/38 タスク完了 (71%)
 
 ### フェーズ別進捗
 - Phase 1（リポジトリ整備）: 18/18 完了 (100%)
 - Phase 2（ドキュメント整備）: 2/4 完了 (50%)
 - Phase 3（自動化・CI）: 0/3 完了 (0%)
-- Phase 4（Anthropicベストプラクティス準拠・高度化）: 5/13 完了 (38%)
+- Phase 4（Anthropicベストプラクティス準拠・高度化）: 7/13 完了 (54%)
 
 ---
 
@@ -114,10 +114,10 @@ tasks:
 | T307 | settings.json Git管理・パーミッション最適化 | P1 | ✅ | 05/09 | SPRINT-006。Project/User分離・ワイルドカード正規化完了 |
 | T308 | Status Lineカスタマイズ（スプリント情報表示） | P3 | ⬜ | 06/06 | |
 | T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | ✅ | 02/18 | SPRINT-007。skill-template.md + skill-quality-checklist.md作成 |
-| T310 | Cursor Agent移植: pre-push-review → Claude Code Agent化 | P1 | ⬜ | — | SP8。仕様→docs/agent-migration-guide.md §2 |
+| T310 | Cursor Agent移植: pre-push-review → Claude Code Agent化 | P1 | ✅ | 02/19 | SP8。SPRINT-008。7ファイル移植・レビュー修正・デプロイ完了 |
 | T311 | Cursor Agent移植: document-review-all → Claude Code Agent化 | P1 | ⬜ | — | SP13。仕様→docs/agent-migration-guide.md §3。分割実装推奨 |
 | T312 | Cursor Agent移植: requirement-definition → Claude Code Agent化 | P1 | ⬜ | — | SP13。仕様→docs/agent-migration-guide.md §4。分割実装推奨 |
-| T313 | Cursor Agent移植: project-analyzer → Claude Code Agent化 | P1 | ⬜ | — | SP8。仕様→docs/agent-migration-guide.md §5 |
+| T313 | Cursor Agent移植: project-analyzer → Claude Code Agent化 | P1 | ✅ | 02/19 | SP8。SPRINT-008。4ファイル移植・レビュー修正・デプロイ完了 |
 
 ---
 
