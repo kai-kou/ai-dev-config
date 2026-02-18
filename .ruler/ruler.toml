@@ -1,0 +1,14 @@
+# Ruler Configuration File
+# AI Dev Config - Cursor & Claude Code 統合ルール管理
+# See https://ai.intellectronica.net/ruler for documentation.
+
+# Default targets: Claude Code and Cursor
+default_agents = ["claude", "cursor"]
+
+# --- Agent Specific Configurations ---
+
+[agents.claude]
+enabled = true
+
+[agents.cursor]
+enabled = true

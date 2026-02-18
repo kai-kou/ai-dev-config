@@ -34,4 +34,10 @@ reviews/
 # *.png
 
 # 社内機密情報を含む可能性があるスキル
-skills/resume-screening/
+cursor/skills/resume-screening/
+
+
+# START Ruler Generated Files
+/AGENTS.md
+/CLAUDE.md
+# END Ruler Generated Files
