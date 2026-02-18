@@ -1,10 +1,10 @@
 ---
 tasks:
-  total: 34
+  total: 38
   completed: 25
   in_progress: 0
   blocked: 0
-  overall_progress: 74
+  overall_progress: 66
 ---
 
 # タスク管理
@@ -34,13 +34,13 @@ tasks:
 
 ## 進捗サマリー
 
-**全体**: 25/34 タスク完了 (74%)
+**全体**: 25/38 タスク完了 (66%)
 
 ### フェーズ別進捗
 - Phase 1（リポジトリ整備）: 18/18 完了 (100%)
 - Phase 2（ドキュメント整備）: 2/4 完了 (50%)
 - Phase 3（自動化・CI）: 0/3 完了 (0%)
-- Phase 4（Anthropicベストプラクティス準拠・高度化）: 5/9 完了 (56%)
+- Phase 4（Anthropicベストプラクティス準拠・高度化）: 5/13 完了 (38%)
 
 ---
 
@@ -114,6 +114,10 @@ tasks:
 | T307 | settings.json Git管理・パーミッション最適化 | P1 | ✅ | 05/09 | SPRINT-006。Project/User分離・ワイルドカード正規化完了 |
 | T308 | Status Lineカスタマイズ（スプリント情報表示） | P3 | ⬜ | 06/06 | |
 | T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | ✅ | 02/18 | SPRINT-007。skill-template.md + skill-quality-checklist.md作成 |
+| T310 | Cursor Agent移植: pre-push-review → Claude Code Agent化 | P1 | ⬜ | — | SP8。仕様→docs/agent-migration-guide.md §2 |
+| T311 | Cursor Agent移植: document-review-all → Claude Code Agent化 | P1 | ⬜ | — | SP13。仕様→docs/agent-migration-guide.md §3。分割実装推奨 |
+| T312 | Cursor Agent移植: requirement-definition → Claude Code Agent化 | P1 | ⬜ | — | SP13。仕様→docs/agent-migration-guide.md §4。分割実装推奨 |
+| T313 | Cursor Agent移植: project-analyzer → Claude Code Agent化 | P1 | ⬜ | — | SP8。仕様→docs/agent-migration-guide.md §5 |
 
 ---
 
@@ -121,8 +125,8 @@ tasks:
 
 | ID | タスク | 優先度 | 期限 |
 |----|--------|--------|------|
-| T304 | Skillエラーハンドリング・トラブルシューティングセクション追加 | P2 | 05/23 |
-| T306 | Claude Code Hooks導入設計・実装 | P2 | 05/30 |
+| T310 | Cursor Agent移植: pre-push-review → Claude Code Agent化 | P1 | — |
+| T313 | Cursor Agent移植: project-analyzer → Claude Code Agent化 | P1 | — |
 
 ---
 
