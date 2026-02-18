@@ -1,6 +1,7 @@
 ---
 name: chat-history-analyzer
 description: CursorのチャットSQLite履歴を抽出・分析し、プロジェクトに特有のSubagent/Skill/Command/Ruleを提案するスキル。「チャット分析」「設定提案」「analyze-chat」と言われたら使用。
+argument-hint: "[project-path]"
 ---
 
 # Chat History Analyzer - チャット履歴分析Skill

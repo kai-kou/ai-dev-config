@@ -1,32 +1,32 @@
 ---
 sprint:
-  id: "SPRINT-005"
-  project: "cursor-agents-skills"
-  date: "2026-02-13"
+  id: "SPRINT-006"
+  project: "ai-dev-config"
+  date: "2026-02-18"
   status: "completed"
   execution_mode: "sequential"
   autonomous: false
 backlog:
   total_tasks: 3
-  total_sp: 7
+  total_sp: 11
   completed_tasks: 3
-  completed_sp: 7
+  completed_sp: 11
   sp_completion_rate: 100
   waves: 0
 ---
 
 # スプリントバックログ
 
-**スプリント**: SPRINT-005（Phase 1完了 & Phase 2開始）
-**プロジェクト**: cursor-agents-skills
-**日付**: 2026-02-13
+**スプリント**: SPRINT-006（M4: Anthropicベストプラクティス準拠 開始）
+**プロジェクト**: ai-dev-config
+**日付**: 2026-02-18
 **ステータス**: completed
 
 ---
 
 ## スプリント目標
 
-> Phase 1完了（要件定義書整備）& Phase 2開始（ドキュメント基盤構築 — セットアップ手順書・コントリビューションガイド）
+> M4（Anthropicベストプラクティス準拠・Claude Code高度化）のP1タスク3件を完了し、全スキル/エージェントの品質基盤を確立する
 
 ---
 
@@ -34,46 +34,115 @@ backlog:
 
 | # | タスクID | タスク名 | SP | 優先度 | 担当 | ステータス | 備考 |
 |---|---------|---------|-----|--------|------|-----------|------|
-| 1 | T005 | 要件定義書の整備 | 3 | P2 | sprint-documenter | ✅ | Phase 1最終タスク。調査ドキュメントから正式要件定義書に改修 |
-| 2 | T104 | セットアップ手順書作成 | 2 | P2 | sprint-documenter | ✅ | Phase 2. docs/setup-guide.md を新規作成 |
-| 3 | T103 | CONTRIBUTING.md作成 | 2 | P3 | sprint-documenter | ✅ | Phase 2. CONTRIBUTING.md を新規作成 |
+| 1 | T307 | settings.json Git管理・パーミッション最適化 | 3 | P1 | sprint-coder | ✅ | Project/User設定分離。ワイルドカード正規化完了 |
+| 2 | T302 | Skill Description最適化（What+When+Triggerパターン統一） | 3 | P1 | sprint-coder | ✅ | What+When+Triggerパターン統一。エージェント3件+スキル1件改善 |
+| 3 | T301 | Skill YAML Frontmatter最適化（公式10フィールド準拠） | 5 | P1 | sprint-coder | ✅ | Frontmatterリファレンス作成。argument-hint追加。全件検証完了 |
 
 ### SP集計
 
 | 項目 | 値 |
 |------|-----|
-| 計画SP合計 | 7 |
-| 完了SP合計 | 7 |
+| 計画SP合計 | 11 |
+| 完了SP合計 | 11 |
 | SP消化率 | 100% |
 | タスク数 | 3 / 3 |
 | 実行モード | 逐次 |
 
 ### 粒度チェック（逐次モード）
 
-- [x] SP合計 ≤ 21（推奨: 5〜13）→ 7 ✅
+- [x] SP合計 ≤ 21（推奨: 5〜13）→ 11 ✅
 - [x] タスク数 ≤ 10（推奨: 3〜7）→ 3 ✅
-- [x] 推定所要時間 ≤ 4時間（推奨: 15分〜2時間）→ 約45分〜1時間
+- [x] 推定所要時間 ≤ 4時間（推奨: 15分〜2時間）→ 約1〜2時間
 
 ---
 
 ## 入力元
 
-- **milestones.md**: M1（リポジトリ構造整備・全Agent/Skill登録）、M2（ドキュメント整備・使用例作成）
-- **tasks.md**: Phase 1 タスク T005、Phase 2 タスク T103〜T104
-- **前回スプリント**: SPRINT-004（Sprint B: chat-history-analyzer強化）完了
-- **前回Try**: なし（cursor-agents-skills固有のHigh優先度Tryなし）
+- **milestones.md**: M4（Anthropicベストプラクティス準拠・Claude Code高度化）
+- **tasks.md**: Phase 4 タスク T301, T302, T307（全P1）
+- **前回スプリント**: SPRINT-005（Phase 1完了 & Phase 2開始）完了
+- **技術調査**: Anthropic公式ドキュメント（skills/hooks/settings 2026-02時点）
 
 ---
 
 ## スコープ変更記録
 
-> なし
+- T301: 備考を修正。「author/version/category/tags追加」→「公式10フィールド（name/description/allowed-tools/model/context/agent/hooks等）への最適化」。公式スキーマに存在しないカスタムフィールドは追加しない方針に変更
+
+---
+
+## タスク実行順序と根拠
+
+### 1. T307（settings.json Git管理）を最初に実行
+
+**理由**: settings.jsonのProject/User分離はスキル最適化の前提基盤。パーミッション設定が整っていないとスキルの`allowed-tools`最適化の判断が困難
+
+**完了条件**:
+- [ ] `.claude/settings.json`（Project level）を作成しGit管理
+- [ ] `.claude/settings.local.json`を`.gitignore`に追加
+- [ ] `$schema`フィールドを追加
+- [ ] パーミッション設定のワイルドカード形式を正規化
+
+### 2. T302（Description最適化）を2番目に実行
+
+**理由**: Descriptionパターンを先に確定することで、T301のfrontmatter最適化時にdescriptionも同時に修正可能
+
+**完了条件**:
+- [ ] What+When+Triggerパターンのガイドライン策定
+- [ ] リポジトリ内の全エージェント定義（11個）のdescription更新
+- [ ] リポジトリ内のCursorスキル（3個）のdescription更新
+- [ ] skills-catalog.md のdescription一覧更新
+
+### 3. T301（Frontmatter最適化）を最後に実行
+
+**理由**: T307のsettings.json整備とT302のdescriptionパターン確定を受けて、frontmatter全体を最適化
+
+**完了条件**:
+- [ ] 公式フィールドの適用ガイドライン策定
+- [ ] リポジトリ内の全エージェント定義（11個）のfrontmatter最適化
+- [ ] リポジトリ内のCursorスキル（3個）のfrontmatter最適化
+- [ ] Skill作成テンプレートへの反映
+
+---
+
+## 技術調査サマリー（Anthropic公式 2026-02時点）
+
+### 公式YAML Frontmatterフィールド（10個）
+
+| フィールド | 必須度 | 説明 |
+|-----------|--------|------|
+| `name` | 推奨 | 省略時はディレクトリ名。lowercase/numbers/hyphens、最大64文字 |
+| `description` | 推奨 | 最大1024文字。Claude自動選択の判断に使用 |
+| `argument-hint` | 任意 | オートコンプリート時のヒント |
+| `disable-model-invocation` | 任意 | trueで自動起動禁止 |
+| `user-invocable` | 任意 | falseで/メニュー非表示 |
+| `allowed-tools` | 任意 | スキル実行中の許可ツール |
+| `model` | 任意 | 使用モデル指定 |
+| `context` | 任意 | "fork"でサブエージェント実行 |
+| `agent` | 任意 | context:fork時のエージェントタイプ |
+| `hooks` | 任意 | スキルスコープのライフサイクルフック |
+
+### Description推奨パターン
+
+```
+"[What the skill does]. Use when [context/triggers]."
+```
+- 三人称で記述（"I can help..."は避ける）
+- 最大1024文字
+
+### settings.json 階層
+
+| レベル | パス | Git管理 |
+|--------|------|---------|
+| User | `~/.claude/settings.json` | No |
+| Project | `.claude/settings.json` | Yes |
+| Local | `.claude/settings.local.json` | No (.gitignore) |
 
 ---
 
 ## POの承認
 
-- [x] PO承認済み（2026-02-13）
+- [ ] PO承認待ち
 
 ---
 
@@ -81,28 +150,18 @@ backlog:
 
 ### タスク選定理由
 
-- T005: Phase 1唯一の未完了タスク。期限 02/21（8日後）で最も緊急。完了でM1完了に大きく前進
-- T104: Phase 2の基盤。セットアップ手順書があることでリポジトリの利用開始がスムーズになる
-- T103: CONTRIBUTING.mdで新規Agent/Skill追加の標準手順を確立。以降のT101（README作成）・T102（使用例作成）に統一的なパターンを提供
+- T307: M4の基盤タスク。settings.jsonのGit管理はCI/CDやチーム開発にも直結
+- T302: スキル品質の最も目に見える改善。Anthropic公式パターンへの準拠で自動選択精度が向上
+- T301: frontmatter最適化でallowed-tools/model指定によるスキル実行の安定性向上
 
 ### 除外タスク
 
 | タスクID | 除外理由 |
 |---------|---------|
-| T101 | SP 5〜8（スコープ大: 23 Agent/Skill分）。分割して次スプリントで着手推奨 |
-| T102 | T101完了後に着手が効率的（使用例はREADME後） |
-| T201〜T203 | Phase 3タスク。Phase 2完了後に着手 |
-
-### Try取り込み判断
-
-- cursor-agents-skills固有のHigh優先度Pending Try: 0件
-- 全プロジェクト横断のPending Try: 28件（棚卸し推奨閾値20件超過。ただし本プロジェクト対象外）
-
-### 自己批判結果（Step 5.5）
-
-- Q1（計画の欠点）: 全タスクがsprint-documenter担当でドキュメント作成に偏る。ただしPhase 2自体がドキュメント整備フェーズのため構造的に妥当
-- Q2（依存関係見落とし）: T103（CONTRIBUTING.md）がT104（セットアップ手順書）の情報を参照する可能性あり → T104を先に実行する順序で対応
-- Q3（SP楽観性）: 全タスクKnown領域で楽観リスク低。T005は既存ドキュメントの拡充のため範囲が明確
-- Q4（目標達成可能性）: SP 7は推奨範囲内。3タスクとも定型ドキュメント作成で不確実性が低い
-- Q5（メンバー視点の懸念解消）: T101先送りはスコープの大きさが理由で妥当。次スプリントで着手
-- リスク事項: M1の完了条件（棚卸し・同期）がT004完了で実質達成済みか未確認。必要に応じてM1ステータス更新をスプリント内で実施
+| T303 | Progressive Disclosure構造化はT301完了後に着手が効率的 |
+| T304 | エラーハンドリングはSP 3以上の主要スキル対象で範囲が広い。次スプリントで |
+| T305 | テストフレームワークはT301-T303完了後に品質基盤として構築 |
+| T306 | Hooks導入はT307（settings.json整備）完了後に着手 |
+| T308 | Status Lineは優先度P3。M4後半で対応 |
+| T309 | テンプレート整備はT301-T302の成果を反映して作成 |
+| T101-T102 | M2タスク。M4優先の方針に従い後回し |

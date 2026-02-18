@@ -37,6 +37,9 @@ reviews/
 cursor/skills/resume-screening/
 
 
+# Claude Code local settings (user-specific, not shared)
+.claude/settings.local.json
+
 # START Ruler Generated Files
 /AGENTS.md
 /AGENTS.md.bak

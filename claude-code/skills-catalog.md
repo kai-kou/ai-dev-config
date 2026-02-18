@@ -3,6 +3,43 @@
 デプロイ先: `~/.claude/skills/`
 スキル総数: 42個
 
+## Frontmatter リファレンス
+
+### Skill Frontmatter（SKILL.md）
+
+```yaml
+---
+name: my-skill                         # 推奨。lowercase/numbers/hyphens、最大64文字
+description: "[What]. [When/Trigger]." # 推奨。最大1024文字。What+When+Triggerパターン
+argument-hint: "[args]"                # 任意。オートコンプリート時のヒント
+disable-model-invocation: false        # 任意。trueでClaude自動起動を禁止
+user-invocable: true                   # 任意。falseで/メニュー非表示
+allowed-tools: Read, Grep, Glob        # 任意。実行中に許可するツール
+model: claude-sonnet-4-6              # 任意。使用モデル
+context: fork                          # 任意。"fork"でサブエージェント実行
+agent: Explore                         # 任意。context:fork時のエージェントタイプ
+hooks: {}                              # 任意。スキルスコープのライフサイクルフック
+---
+```
+
+### Agent Frontmatter（`~/.claude/agents/`）
+
+```yaml
+---
+name: my-agent                         # 必須。subagent_typeとして参照される
+description: "[What]. [When/Trigger]." # 必須。エージェント選択の判断に使用
+model: sonnet                          # 推奨。sonnet|opus|haiku
+maxTurns: 20                           # 推奨。最大APIラウンドトリップ数
+tools: [Read, Glob, Grep]              # 推奨。最小権限原則で設定
+memory: user                           # 任意。永続メモリの有効化
+---
+```
+
+### Description パターン（What + When + Trigger）
+
+- ユーザー起動型: `[What]. [Context]. 「trigger」と言われたら使用。`
+- 内部サブエージェント: `[What]. [Details]. [parent]の[Phase]で呼び出される。`
+
 ## 日常ワークフロー（5個）
 
 | スキル | コマンド | 説明 |

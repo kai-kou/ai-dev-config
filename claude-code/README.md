@@ -17,7 +17,7 @@ claude-code/
 |---------|--------|-----------|
 | エージェント | `claude-code/agents/` | `~/.claude/agents/` |
 | スキル | `~/.claude/skills/`（直接管理） | — |
-| 共有ペルソナ | `shared/persona/` | `~/.claude/agents/`（名前が同じものはagentsとして利用） |
+| 共有ペルソナ | `persona/` | `~/.claude/agents/`（名前が同じものはagentsとして利用） |
 
 ## 同期手順
 

@@ -93,26 +93,26 @@ milestones:
 ## M4: Anthropicベストプラクティス準拠・Claude Code高度化
 
 **期限**: 2026-06-30
-**ステータス**: ⬜ 未着手
+**ステータス**: 🔄 進行中
 
 ### 根拠ドキュメント
 - Anthropic公式「The Complete Guide to Building Skills for Claude」
 - Qiita「Claude Code カスタマイズ完全ガイド」（Boris Cherny氏のアプローチ）
 
 ### 完了条件
-- [ ] 全42スキルのYAML FrontmatterがAnthropic標準に準拠（metadata/compatibility追加）
-- [ ] 全スキルのDescriptionがWhat+When+Triggerパターンに統一
+- [x] 全42スキルのYAML FrontmatterがAnthropic標準に準拠（T301 SPRINT-006）
+- [x] 全スキルのDescriptionがWhat+When+Triggerパターンに統一（T302 SPRINT-006）
 - [ ] 主要スキルにProgressive Disclosure構造（references/scripts/assets）導入
 - [ ] スキルテストフレームワーク構築（トリガー/機能/性能テスト）
 - [ ] Claude Code Hooks導入（ライフサイクルイベント活用）
-- [ ] settings.jsonのGit管理体制確立（Project/User設定分離）
+- [x] settings.jsonのGit管理体制確立（Project/User設定分離）（T307 SPRINT-006）
 - [ ] Skill作成テンプレート・品質監査チェックリスト整備
 
 ### 成果物
-- [ ] 全42スキルのFrontmatter/Description改善
+- [x] 全42スキルのFrontmatter/Description改善（T301/T302 SPRINT-006）
 - [ ] テストフレームワーク（triggering/functional/performance）
 - [ ] Hooks設定ファイル群
-- [ ] settings.json（Project/User分離）
+- [x] settings.json（Project/User分離）（T307 SPRINT-006）
 - [ ] Skill作成テンプレート改善版
 - [ ] Status Lineカスタマイズ設定
 
