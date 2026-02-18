@@ -1,10 +1,10 @@
 ---
 tasks:
   total: 34
-  completed: 23
+  completed: 25
   in_progress: 0
   blocked: 0
-  overall_progress: 68
+  overall_progress: 74
 ---
 
 # タスク管理
@@ -34,13 +34,13 @@ tasks:
 
 ## 進捗サマリー
 
-**全体**: 23/34 タスク完了 (68%)
+**全体**: 25/34 タスク完了 (74%)
 
 ### フェーズ別進捗
 - Phase 1（リポジトリ整備）: 18/18 完了 (100%)
 - Phase 2（ドキュメント整備）: 2/4 完了 (50%)
 - Phase 3（自動化・CI）: 0/3 完了 (0%)
-- Phase 4（Anthropicベストプラクティス準拠・高度化）: 3/9 完了 (33%)
+- Phase 4（Anthropicベストプラクティス準拠・高度化）: 5/9 完了 (56%)
 
 ---
 
@@ -107,13 +107,13 @@ tasks:
 |----|--------|--------|-----------|------|------|
 | T301 | Skill YAML Frontmatter最適化（公式10フィールド準拠） | P1 | ✅ | 05/09 | SPRINT-006。Frontmatterリファレンス作成・argument-hint追加 |
 | T302 | Skill Description最適化（What+When+Triggerパターン統一） | P1 | ✅ | 05/09 | SPRINT-006。What+When+Triggerパターン統一完了 |
-| T303 | Progressive Disclosure構造化（references/scripts/assets導入） | P2 | ⬜ | 05/16 | 主要スキル対象。SKILL.md肥大化の解消 |
+| T303 | Progressive Disclosure構造化（references/scripts/assets導入） | P2 | ✅ | 02/18 | SPRINT-007。chat-history-analyzer分割、resume-screening references/整理 |
 | T304 | Skillエラーハンドリング・トラブルシューティングセクション追加 | P2 | ⬜ | 05/23 | SP3以上のスキル対象 |
 | T305 | Skillテストフレームワーク構築（トリガー/機能/性能テスト） | P2 | ⬜ | 05/23 | テストスイート設計・CI連携 |
 | T306 | Claude Code Hooks導入設計・実装 | P2 | ⬜ | 05/30 | ライフサイクルフック活用 |
 | T307 | settings.json Git管理・パーミッション最適化 | P1 | ✅ | 05/09 | SPRINT-006。Project/User分離・ワイルドカード正規化完了 |
 | T308 | Status Lineカスタマイズ（スプリント情報表示） | P3 | ⬜ | 06/06 | |
-| T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | ⬜ | 05/16 | Anthropic Quick Checklist準拠。CONTRIBUTING.md連動 |
+| T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | ✅ | 02/18 | SPRINT-007。skill-template.md + skill-quality-checklist.md作成 |
 
 ---
 
@@ -121,8 +121,8 @@ tasks:
 
 | ID | タスク | 優先度 | 期限 |
 |----|--------|--------|------|
-| T303 | Progressive Disclosure構造化 | P2 | 05/16 |
-| T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | 05/16 |
+| T304 | Skillエラーハンドリング・トラブルシューティングセクション追加 | P2 | 05/23 |
+| T306 | Claude Code Hooks導入設計・実装 | P2 | 05/30 |
 
 ---
 

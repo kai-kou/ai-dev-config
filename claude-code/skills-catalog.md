@@ -40,6 +40,26 @@ memory: user                           # 任意。永続メモリの有効化
 - ユーザー起動型: `[What]. [Context]. 「trigger」と言われたら使用。`
 - 内部サブエージェント: `[What]. [Details]. [parent]の[Phase]で呼び出される。`
 
+### Progressive Disclosure（スキル構造化）
+
+SKILL.mdが肥大化する場合（目安: 150行超）、補助情報を `references/` に分離する:
+
+```
+skills/my-skill/
+├── SKILL.md              # コア定義（使用タイミング・ワークフロー・使用例）
+├── scripts/              # 実行スクリプト（ある場合）
+└── references/            # 補助ファイル
+    ├── TROUBLESHOOTING.md # トラブルシューティング
+    ├── LIMITATIONS.md     # 制限事項・既知の問題
+    ├── CRITERIA.md        # 評価基準・判定ロジック
+    └── TEMPLATE.md        # 出力テンプレート
+```
+
+- SKILL.mdには概要とリンクのみ残し、詳細は参照ファイルに委譲
+- 参照ファイルは自己完結（単独で理解可能）であること
+- 新規スキル作成時のテンプレート: [docs/skill-template.md](../docs/skill-template.md)
+- 品質チェック: [docs/skill-quality-checklist.md](../docs/skill-quality-checklist.md)
+
 ## 日常ワークフロー（5個）
 
 | スキル | コマンド | 説明 |

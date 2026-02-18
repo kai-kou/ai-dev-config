@@ -144,85 +144,19 @@ Cursorのチャット画面で `/analyze-chat` と入力するだけで、カレ
 
 ## トラブルシューティング
 
-### ワークスペースが見つからない
+→ 詳細: [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md)
 
-**症状**: `No workspace found for project path` エラー
-
-**原因と対策**:
-1. **Cursorで一度も開いたことがないプロジェクト**: Cursorでプロジェクトを一度開いてから再実行する
-2. **プロジェクトパスが間違っている**: `pwd` でカレントディレクトリを確認する
-3. **workspaceStorageが別の場所にある**: `ls ~/Library/Application\ Support/Cursor/User/workspaceStorage/` でディレクトリの存在を確認する
-
-### SQLite DBが読み取れない（WALロック）
-
-**症状**: `database is locked` エラー
-
-**原因**: CursorがDBに書き込み中でWALロックが発生している
-
-**対策**:
-1. Cursorを一度終了してから再実行する（最も確実）
-2. DBファイルをコピーしてから読み取る: `cp state.vscdb /tmp/state-copy.vscdb`
-3. 数秒待ってからリトライする（一時的なロックの場合）
-
-### 会話データが0件
-
-**症状**: `No conversations found` メッセージ
-
-**原因と対策**:
-1. **新規プロジェクト**: チャット履歴が蓄積されてから再実行する（最低10会話推奨）
-2. **Cursorバージョンアップ後**: DB構造が変更された可能性。スクリプトの更新が必要
-3. **別のワークスペース**: 同じプロジェクトを複数のワークスペースで開いている場合、データが分散している可能性がある
-
-### 分析データが大きすぎる
-
-**症状**: 処理時間が長い、メモリ不足
-
-**対策**: 抽出スクリプトにフィルタオプションを追加して実行する:
-
-```bash
-python3 extract_chat_history.py "{project_root}" \
-  --output /tmp/chat-history-analysis.json \
-  --max-conversations 50 \
-  --max-messages 500 \
-  --verbose
-```
-
-### Pythonバージョンエラー
-
-**症状**: SyntaxError, ModuleNotFoundError
-
-**対策**:
-- Python 3.9以上が必要。`python3 --version` で確認する
-- macOSの場合、標準の `python3` で動作確認済み
-- pyenvを使用している場合: `pyenv shell 3.9` 以上を設定する
+よくある問題: ワークスペース未検出、WALロック、データ0件、大量データ処理、Pythonバージョン
 
 ---
 
-## 制限事項と既知の問題
+## 制限事項
 
-### プラットフォーム制限
+→ 詳細: [references/LIMITATIONS.md](references/LIMITATIONS.md)
 
-| 項目 | 状況 |
-|------|------|
-| macOS | 完全サポート |
-| Windows | 未サポート（DBパスが異なる） |
-| Linux | 未サポート（DBパスが異なる） |
-
-### 機能制限
-
-| 制限 | 説明 | 将来の改善計画 |
-|------|------|-------------|
-| 増分分析なし | 毎回全データを再分析する | 前回分析からの差分のみを処理する機能 |
-| AIレスポンス未活用 | ユーザーメッセージのみ分析対象 | AI応答パターンの分析追加 |
-| 固定閾値 | パターン検出閾値（3回以上）がハードコード | 会話量に応じた動的閾値 |
-| 一時ファイル手動削除 | `/tmp/chat-history-*.json` が残る | 分析完了後の自動クリーンアップ |
-| 単一プロジェクト分析 | 1プロジェクトずつの分析のみ | 複数プロジェクト横断分析 |
-
-### CursorバージョンとDB互換性
-
-- 動作確認バージョン: Cursor 0.45.x 系
-- CursorのバージョンアップでSQLite DBのスキーマが変更される可能性がある
-- 互換性問題が発生した場合、`extract_chat_history.py` の更新が必要
+- macOSのみサポート（Windows/Linux未対応）
+- 増分分析なし（毎回全データ再分析）
+- Cursor 0.45.x系で動作確認済み
 
 ---
 

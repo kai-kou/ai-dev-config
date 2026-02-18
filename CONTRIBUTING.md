@@ -89,6 +89,9 @@ is_background: false
 
 ## 新規 Skill の追加
 
+> 詳細テンプレート: [docs/skill-template.md](docs/skill-template.md)
+> 品質チェック: [docs/skill-quality-checklist.md](docs/skill-quality-checklist.md)
+
 ### 1. ディレクトリとファイルを作成
 
 ```bash
@@ -103,39 +106,61 @@ touch skills/my-skill/SKILL.md
 ```yaml
 ---
 name: my-skill
-description: このスキルの1行説明。トリガー例も含める。「xxx」と言われたら使用。
+description: "[What: 機能説明]. [When/Trigger: 使用条件]。「トリガー1」「トリガー2」と言われたら使用。"
+argument-hint: "[引数のヒント]"
 ---
 ```
 
 | フィールド | 必須 | 説明 |
 |-----------|------|------|
-| `name` | ✅ | スキル名（kebab-case） |
-| `description` | ✅ | 1行の説明 + トリガー例 |
+| `name` | ✅ | スキル名（kebab-case、最大64文字） |
+| `description` | ✅ | What+When+Triggerパターン（最大1024文字） |
+| `argument-hint` | 推奨 | オートコンプリート時のヒント |
+
+全フィールド一覧は [skills-catalog.md の Frontmatter リファレンス](claude-code/skills-catalog.md) を参照。
 
 ### 3. 本文を記述
 
-以下のセクションを含めてください:
+以下の**必須セクション**を含めてください:
 
-- **役割**: スキルの責務
-- **作業フロー**: 処理の流れ
-- **品質基準**: 出力の品質チェックリスト
-- **連携先**: 他のAgent/Skillとの連携
+- **使用タイミング**: いつ使うか（トリガー条件一覧）
+- **ワークフロー**: Step 1, Step 2... の処理フロー
+- **使用例**: 具体的な入力→出力の例（1つ以上）
+- **品質チェックリスト**: 出力の品質確認項目
+
+大規模スキル（SP 5以上）は追加で:
+
+- **トラブルシューティング**: よくある問題と解決策
+- **制限事項**: 既知の制限
+- **前提条件**: 必要な環境・ツール
+- **関連ファイル**: 依存するファイル・エージェント
 
 ### 4. README.md を更新
 
 `README.md` の Skills テーブルに新しいスキルを追加してください。
 
-### 5. 参照ファイルがある場合
+### 5. 参照ファイルがある場合（Progressive Disclosure）
 
-スキルが参照する補助ファイルは `skills/my-skill/references/` に配置します:
+SKILL.mdが肥大化する場合、補助ファイルを `references/` に分離します:
 
 ```
 skills/my-skill/
-├── SKILL.md
+├── SKILL.md              # コア定義（150行以内を目安）
 └── references/
-    ├── ERROR_HANDLING.md
-    └── POSTING_FORMAT.md
+    ├── CRITERIA.md        # 評価基準・判定ロジック
+    ├── TEMPLATE.md        # 出力テンプレート
+    └── ERROR_HANDLING.md  # エラー処理ガイド
 ```
+
+### 6. 品質チェック
+
+[品質監査チェックリスト](docs/skill-quality-checklist.md) で以下を確認:
+
+- [ ] Frontmatter が Anthropic公式10フィールドに準拠
+- [ ] Description が What+When+Trigger パターン
+- [ ] 必須セクション（使用タイミング・ワークフロー・使用例）が揃っている
+- [ ] Markdown の見出し階層・テーブル構造が正しい
+- [ ] ファイルパス参照先が実在する
 
 ---
 
@@ -252,3 +277,6 @@ rsync -av --delete rules/ ~/.cursor/rules/
 | README | `README.md` | プロジェクト概要・コンテンツ一覧 |
 | セットアップ手順書 | `docs/setup-guide.md` | クローン・同期・検証の手順 |
 | 要件定義書 | `docs/requirements-cursor-config-git-management.md` | プロジェクトの要件・設計 |
+| Skill作成テンプレート | `docs/skill-template.md` | 新規スキル作成のひな形 |
+| Skill品質チェックリスト | `docs/skill-quality-checklist.md` | スキル品質監査の基準 |
+| Frontmatterリファレンス | `claude-code/skills-catalog.md` | YAML Frontmatter公式フィールド一覧 |
