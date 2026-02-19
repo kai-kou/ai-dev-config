@@ -1,10 +1,10 @@
 ---
 tasks:
   total: 38
-  completed: 29
+  completed: 30
   in_progress: 0
   blocked: 0
-  overall_progress: 76
+  overall_progress: 79
 ---
 
 # タスク管理
@@ -34,13 +34,13 @@ tasks:
 
 ## 進捗サマリー
 
-**全体**: 29/38 タスク完了 (76%)
+**全体**: 30/38 タスク完了 (79%)
 
 ### フェーズ別進捗
 - Phase 1（リポジトリ整備）: 18/18 完了 (100%)
 - Phase 2（ドキュメント整備）: 2/4 完了 (50%)
 - Phase 3（自動化・CI）: 0/3 完了 (0%)
-- Phase 4（Anthropicベストプラクティス準拠・高度化）: 9/13 完了 (69%)
+- Phase 4（Anthropicベストプラクティス準拠・高度化）: 10/13 完了 (77%)
 
 ---
 
@@ -116,7 +116,7 @@ tasks:
 | T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | ✅ | 02/18 | SPRINT-007。skill-template.md + skill-quality-checklist.md作成 |
 | T310 | Cursor Agent移植: pre-push-review → Claude Code Agent化 | P1 | ✅ | 02/19 | SP8。SPRINT-008。7ファイル移植・レビュー修正・デプロイ完了 |
 | T311 | Cursor Agent移植: document-review-all → Claude Code Agent化 | P1 | ✅ | 02/19 | SPRINT-009。10ファイル移植・品質チェック・デプロイ完了 |
-| T312 | Cursor Agent移植: requirement-definition → Claude Code Agent化 | P1 | ⬜ | — | SP13。仕様→docs/agent-migration-guide.md §4。分割実装推奨 |
+| T312 | Cursor Agent移植: requirement-definition → Claude Code Agent化 | P1 | ✅ | 02/19 | SP13。フェーズA(SP5)SPRINT-010、フェーズB(SP8)SPRINT-011で完了。9ファイル移植+ゲート強化+再開ロジック |
 | T313 | Cursor Agent移植: project-analyzer → Claude Code Agent化 | P1 | ✅ | 02/19 | SP8。SPRINT-008。4ファイル移植・レビュー修正・デプロイ完了 |
 
 ---

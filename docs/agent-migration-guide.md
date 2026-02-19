@@ -1,7 +1,7 @@
 ---
 title: Cursor Agent → Claude Code Agent 移植ガイド
 created: 2026-02-18
-updated: 2026-02-18
+updated: 2026-02-19
 targets: [T310, T311, T312, T313]
 total_sp: 42
 ---
@@ -125,6 +125,22 @@ PO が手動で `deploy.sh` を実行する必要がある。
 - Claude Code → ~/.cursor/ : サンドボックス制限により直接書き込み不可
 - src/ 変更を含むスプリントでは、コミット&push後にPOが deploy.sh を実行
 ```
+
+### 1.7 移植完了条件チェックリスト
+
+移植タスクの完了報告前に、以下の全項目を確認すること。
+
+| # | チェック項目 | 確認方法 |
+|---|------------|---------|
+| 1 | YAML Frontmatter が Claude Code 形式に準拠 | §1.1 変換テーブルとの照合 |
+| 2 | `tools` が Agent 責務に対して最小権限 | §1.2 判断フローで検証 |
+| 3 | サブエージェントのファイル名が `{親agent}-{role}.md` 形式 | §1.3 命名規則との照合 |
+| 4 | リポジトリ管理コピーを `claude-code/agents/` に配置 | `ls claude-code/agents/{agent-name}*.md` |
+| 5 | **ランタイムデプロイ完了**: `~/.claude/agents/` に配置 | `ls ~/.claude/agents/{agent-name}*.md` |
+| 6 | Claude Code が subagent_type として認識可能 | Task tool で起動テスト |
+| 7 | 関連ドキュメント（tasks.md / milestones.md）の進捗反映 | フロントマター集計値の再計算 |
+
+**特に重要**: #5（ランタイムデプロイ）は見落としやすい。リポジトリへの配置（#4）だけでは Claude Code から利用できない。
 
 ---
 
