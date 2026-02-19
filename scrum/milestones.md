@@ -3,7 +3,7 @@ milestones:
   total: 4
   completed: 1
   in_progress: 2
-  overall_progress: 53
+  overall_progress: 55
 ---
 
 # マイルストーン管理
@@ -31,9 +31,9 @@ milestones:
 | M1: リポジトリ構造整備・全Agent/Skill登録 | 2026-02-28 | ✅ 完了 | 100% |
 | M2: ドキュメント整備・使用例作成 | 2026-03-31 | 🔄 進行中 | 33% |
 | M3: 同期スクリプト・CI自動化 | 2026-04-30 | ⬜ 未着手 | 0% |
-| M4: Anthropicベストプラクティス準拠・高度化 | 2026-06-30 | 🔄 進行中 | 77% |
+| M4: Anthropicベストプラクティス準拠・高度化 | 2026-06-30 | 🔄 進行中 | 85% |
 
-**全体進捗**: 53%
+**全体進捗**: 55%
 
 ---
 
@@ -104,7 +104,7 @@ milestones:
 - [x] 全スキルのDescriptionがWhat+When+Triggerパターンに統一（T302 SPRINT-006）
 - [x] 主要スキルにProgressive Disclosure構造（references/scripts/assets）導入（T303 SPRINT-007）
 - [ ] スキルテストフレームワーク構築（トリガー/機能/性能テスト）
-- [ ] Claude Code Hooks導入（ライフサイクルイベント活用）
+- [x] Claude Code Hooks導入（ライフサイクルイベント活用）（T306 SPRINT-012）
 - [x] settings.jsonのGit管理体制確立（Project/User設定分離）（T307 SPRINT-006）
 - [x] Skill作成テンプレート・品質監査チェックリスト整備（T309 SPRINT-007）
 - [x] Cursor Agent → Claude Code Agent移植（T310-T313: pre-push-review✅, document-review-all✅, requirement-definition✅, project-analyzer✅ — 4/4完了）
@@ -112,7 +112,7 @@ milestones:
 ### 成果物
 - [x] 全42スキルのFrontmatter/Description改善（T301/T302 SPRINT-006）
 - [ ] テストフレームワーク（triggering/functional/performance）
-- [ ] Hooks設定ファイル群
+- [x] Hooks設定ファイル群（T306 SPRINT-012: 5スクリプト + HOOKS.md）
 - [x] settings.json（Project/User分離）（T307 SPRINT-006）
 - [x] Skill作成テンプレート・品質チェックリスト（T309 SPRINT-007）
 - [x] Progressive Disclosure構造化（T303 SPRINT-007）

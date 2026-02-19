@@ -1,10 +1,10 @@
 ---
 tasks:
   total: 38
-  completed: 30
+  completed: 31
   in_progress: 0
   blocked: 0
-  overall_progress: 79
+  overall_progress: 82
 ---
 
 # タスク管理
@@ -34,13 +34,13 @@ tasks:
 
 ## 進捗サマリー
 
-**全体**: 30/38 タスク完了 (79%)
+**全体**: 31/38 タスク完了 (82%)
 
 ### フェーズ別進捗
 - Phase 1（リポジトリ整備）: 18/18 完了 (100%)
 - Phase 2（ドキュメント整備）: 2/4 完了 (50%)
 - Phase 3（自動化・CI）: 0/3 完了 (0%)
-- Phase 4（Anthropicベストプラクティス準拠・高度化）: 10/13 完了 (77%)
+- Phase 4（Anthropicベストプラクティス準拠・高度化）: 11/13 完了 (85%)
 
 ---
 
@@ -110,7 +110,7 @@ tasks:
 | T303 | Progressive Disclosure構造化（references/scripts/assets導入） | P2 | ✅ | 02/18 | SPRINT-007。chat-history-analyzer分割、resume-screening references/整理 |
 | T304 | Skillエラーハンドリング・トラブルシューティングセクション追加 | P2 | ✅ | 02/19 | SPRINT-009。3件追加（project-analyzer/sprint-coder/po-assistant）+デプロイ完了 |
 | T305 | Skillテストフレームワーク構築（トリガー/機能/性能テスト） | P2 | ⬜ | 05/23 | テストスイート設計・CI連携 |
-| T306 | Claude Code Hooks導入設計・実装 | P2 | ⬜ | 05/30 | ライフサイクルフック活用 |
+| T306 | Claude Code Hooks導入設計・実装 | P2 | ✅ | 02/19 | SPRINT-012。hooks/5スクリプト管理化、compact-reinject+post-edit-lint新規追加、HOOKS.md作成 |
 | T307 | settings.json Git管理・パーミッション最適化 | P1 | ✅ | 05/09 | SPRINT-006。Project/User分離・ワイルドカード正規化完了 |
 | T308 | Status Lineカスタマイズ（スプリント情報表示） | P3 | ⬜ | 06/06 | |
 | T309 | Skill作成テンプレート整備・品質監査チェックリスト | P2 | ✅ | 02/18 | SPRINT-007。skill-template.md + skill-quality-checklist.md作成 |
