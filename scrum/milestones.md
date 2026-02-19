@@ -3,13 +3,13 @@ milestones:
   total: 4
   completed: 1
   in_progress: 2
-  overall_progress: 46
+  overall_progress: 50
 ---
 
 # マイルストーン管理
 
 **プロジェクト**: Cursor Agents/Skills GitHub管理（cursor-agents-skills）
-**最終更新**: 2026-02-18
+**最終更新**: 2026-02-19
 
 ---
 
@@ -31,9 +31,9 @@ milestones:
 | M1: リポジトリ構造整備・全Agent/Skill登録 | 2026-02-28 | ✅ 完了 | 100% |
 | M2: ドキュメント整備・使用例作成 | 2026-03-31 | 🔄 進行中 | 33% |
 | M3: 同期スクリプト・CI自動化 | 2026-04-30 | ⬜ 未着手 | 0% |
-| M4: Anthropicベストプラクティス準拠・高度化 | 2026-06-30 | 🔄 進行中 | 50% |
+| M4: Anthropicベストプラクティス準拠・高度化 | 2026-06-30 | 🔄 進行中 | 69% |
 
-**全体進捗**: 46%
+**全体進捗**: 50%
 
 ---
 
@@ -107,7 +107,7 @@ milestones:
 - [ ] Claude Code Hooks導入（ライフサイクルイベント活用）
 - [x] settings.jsonのGit管理体制確立（Project/User設定分離）（T307 SPRINT-006）
 - [x] Skill作成テンプレート・品質監査チェックリスト整備（T309 SPRINT-007）
-- [ ] Cursor Agent → Claude Code Agent移植（T310-T313: pre-push-review, document-review-all, requirement-definition, project-analyzer）
+- [ ] Cursor Agent → Claude Code Agent移植（T310-T313: pre-push-review✅, document-review-all✅, requirement-definition, project-analyzer✅ — 3/4完了）
 
 ### 成果物
 - [x] 全42スキルのFrontmatter/Description改善（T301/T302 SPRINT-006）
@@ -117,7 +117,7 @@ milestones:
 - [x] Skill作成テンプレート・品質チェックリスト（T309 SPRINT-007）
 - [x] Progressive Disclosure構造化（T303 SPRINT-007）
 - [ ] Status Lineカスタマイズ設定
-- [ ] Claude Code Agent定義ファイル（T310-T313: 4 Agent + サブエージェント群）
+- [ ] Claude Code Agent定義ファイル（T310✅ 7件 + T311✅ 10件 + T313✅ 4件 移植済み / T312 未着手）
 
 ---
 
