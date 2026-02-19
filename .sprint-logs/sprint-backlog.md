@@ -1,32 +1,32 @@
 ---
 sprint:
-  id: "SPRINT-009"
+  id: "SPRINT-010"
   project: "ai-dev-config"
   date: "2026-02-19"
-  status: "completed"
+  status: "in_progress"
   execution_mode: "sequential"
   autonomous: false
 backlog:
   total_tasks: 3
-  total_sp: 16
+  total_sp: 8
   completed_tasks: 3
-  completed_sp: 16
+  completed_sp: 8
   sp_completion_rate: 100
   waves: 0
 ---
 
 # スプリントバックログ
 
-**スプリント**: SPRINT-009（M4: Skillエラーハンドリング + document-review-all移植）
+**スプリント**: SPRINT-010（M4: requirement-definition移植 フェーズA + Try回収）
 **プロジェクト**: ai-dev-config
 **日付**: 2026-02-19
-**ステータス**: completed
+**ステータス**: in_progress
 
 ---
 
 ## スプリント目標
 
-> M4継続 — document-review-all の Claude Code Agent 移植（フェーズA: Agent定義ファイル群の作成 + フェーズB: 統合・修正計画Agent+並列制御）と Skill エラーハンドリング追加を実施し、移植基盤の品質を底上げする。
+> M4継続 — requirement-definition の Claude Code Agent 移植フェーズA（オーケストレータ + 8サブエージェント定義）を実施。前回Try（サンドボックス注意書き・tools選択ガイド）を先行回収し移植品質を底上げする。
 
 ---
 
@@ -34,86 +34,79 @@ backlog:
 
 | # | タスクID | タスク名 | SP | 優先度 | 担当 | ステータス | 備考 |
 |---|---------|---------|-----|--------|------|-----------|------|
-| 1 | T304 | Skillエラーハンドリング・トラブルシューティングセクション追加 | 3 | P2 | sprint-coder | ✅ | 3件追加（project-analyzer/sprint-coder/po-assistant）+ランタイムデプロイ完了 |
-| 2 | T311-A | document-review-all移植 フェーズA（オケ+7レビュー軸Agent定義） | 5 | P1 | sprint-coder | ✅ | 8ファイル作成完了。doc-review.md(オケ)+7軸Agent |
-| 3 | T311-B | document-review-all移植 フェーズB（統合・修正計画Agent+並列制御+デプロイ） | 8 | P1 | sprint-coder | ✅ | 統合Agent2件作成+tools最小権限修正+品質チェック全項目クリア+10ファイルデプロイ完了 |
+| 1 | TRY-011 | agent-migration-guideにデプロイ手順のサンドボックス注意書き追記 | 1 | P2 | sprint-documenter | ✅ | §1.6追加。サンドボックス制約・Cursorデプロイ手順を明記 |
+| 2 | TRY-012 | Agent作成テンプレートのYAML frontmatterにtools選択ガイド追加 | 2 | P2 | sprint-documenter | ✅ | §1.2拡充。判断フロー・最小権限原則・5パターン追加 |
+| 3 | T312-A | requirement-definition移植 フェーズA（オケ + 8サブエージェント定義） | 5 | P1 | sprint-coder | ✅ | 9ファイル作成完了。reqdef.md(オケ)+8サブAgent。品質チェック全項目クリア |
 
 ### SP集計
 
 | 項目 | 値 |
 |------|-----|
-| 計画SP合計 | 16 |
-| 完了SP合計 | 16 |
+| 計画SP合計 | 8 |
+| 完了SP合計 | 8 |
 | SP消化率 | 100% |
 | タスク数 | 3 / 3 |
 | 実行モード | 逐次 |
 
 ### 粒度チェック（逐次モード）
 
-- [x] SP合計 ≤ 21（推奨: 5〜13）→ 16 ⚠️ 推奨超だが21以内
+- [x] SP合計 ≤ 21（推奨: 5〜13）→ 8 ✅
 - [x] タスク数 ≤ 10（推奨: 3〜7）→ 3 ✅
-- [ ] 推定所要時間 ≤ 4時間（推奨: 15分〜2時間）→ 約2〜3時間
+- [x] 推定所要時間 ≤ 4時間（推奨: 15分〜2時間）→ 約1〜1.5時間
 
 ---
 
 ## 入力元
 
 - **milestones.md**: M4（Anthropicベストプラクティス準拠・Claude Code高度化）
-- **tasks.md**: Phase 4 タスク T304, T311
-- **移植仕様書**: `docs/agent-migration-guide.md`（§3: T311）
-- **前回スプリント**: SPRINT-008（M4 P1タスク2件完了、SP16消化率100%）
-- **SPRINT-008 レトロ**: T304先行実施で移植品質向上の可能性。T311/T312は分割スプリント推奨
+- **tasks.md**: Phase 4 タスク T312
+- **移植仕様書**: `docs/agent-migration-guide.md`（§4: T312）
+- **前回スプリント**: SPRINT-009（M4 P1タスク1件+P2タスク1件完了、SP16消化率100%）
+- **try-stock.md**: TRY-011, TRY-012（SPRINT-009レトロ由来の改善）
 
 ---
 
 ## タスク実行順序と根拠
 
-### 1. T304（Skillエラーハンドリング追加）を最初に実行
+### 1. TRY-011（サンドボックス注意書き追記）を最初に実行
 
-**理由**: SPRINT-008のTryで「T311/T312の前にエラーハンドリング追加を実施すると移植品質が向上する」と指摘。エラーハンドリングパターンを先に確立し、T311移植時に組み込む
+**理由**: agent-migration-guide.mdのデプロイ手順にClaude Codeサンドボックス制約の注意書きを追加。T312-A移植前にガイドを最新化する
 
 **完了条件**:
-- [ ] SP3以上の主要スキルにエラーハンドリングセクションを追加
-- [ ] トラブルシューティングガイドのテンプレートを定義
-- [ ] 既存スキルの品質向上に寄与
+- [ ] `docs/agent-migration-guide.md` のデプロイ関連セクションにサンドボックス注意書きを追記
+- [ ] `~/.claude/agents/` へのデプロイがサンドボックスモードで可能であることを明記
+- [ ] Cursor向け `deploy.sh` が必要なケースの説明を追加
 
-### 2. T311-A（document-review-all移植 フェーズA）を2番目に実行
+### 2. TRY-012（tools選択ガイド追加）を2番目に実行
 
-**理由**: オーケストレータと7レビュー軸のAgent定義ファイルを作成。SPRINT-008で確立した移植パターンを適用
+**理由**: Agent作成時のtools選択判断基準をテンプレートに追加。T312-Aの各サブエージェントに適切なtools設定を行う準備
 
-**成果物（8ファイル）**:
-- `claude-code/agents/doc-review.md`（オーケストレータ）
-- `claude-code/agents/doc-review-strategy.md`
-- `claude-code/agents/doc-review-logic-mece.md`
-- `claude-code/agents/doc-review-execution.md`
-- `claude-code/agents/doc-review-perspective.md`
-- `claude-code/agents/doc-review-readability.md`
-- `claude-code/agents/doc-review-humanize.md`
-- `claude-code/agents/doc-review-risk.md`
+**完了条件**:
+- [ ] Agent定義テンプレートまたは移植ガイドにtools選択の判断基準を追記
+- [ ] 役割別の推奨toolsパターン（読み取り専用/書き込みあり/Bash必要）を明記
+- [ ] 既存の移植ガイド§1.2ツールマッピングとの整合性確認
+
+### 3. T312-A（requirement-definition移植 フェーズA）を3番目に実行
+
+**理由**: 改善済みガイド・テンプレートを参照しながら9ファイル（オケ1+サブ8）を移植
+
+**成果物（9ファイル）**:
+- `claude-code/agents/reqdef.md`（オーケストレータ）
+- `claude-code/agents/reqdef-hearing.md`
+- `claude-code/agents/reqdef-context.md`
+- `claude-code/agents/reqdef-stakeholder.md`
+- `claude-code/agents/reqdef-scope.md`
+- `claude-code/agents/reqdef-risk.md`
+- `claude-code/agents/reqdef-composer.md`
+- `claude-code/agents/reqdef-humanize.md`
+- `claude-code/agents/reqdef-integrator.md`
 
 **完了条件**:
 - [ ] YAML frontmatter が Claude Code 形式に準拠
 - [ ] `tools` がAgent責務に対して最小権限
-- [ ] サブエージェントのファイル名が `doc-review-{role}.md` 形式
-- [ ] 各レビュー軸の評価観点・プロンプトが移植済み
+- [ ] サブエージェントのファイル名が `reqdef-{role}.md` 形式
+- [ ] 各サブエージェントのプロンプトが移植済み
 - [ ] リポジトリの `claude-code/agents/` に管理コピーを配置
-
-### 3. T311-B（document-review-all移植 フェーズB）を3番目に実行
-
-**理由**: 統合Agent2件と並列実行制御を実装。E2Eの品質チェックとデプロイを完了
-
-**成果物（2ファイル + オケ更新）**:
-- `claude-code/agents/doc-review-integrate.md`（統合Agent）
-- `claude-code/agents/doc-review-revision-plan.md`（修正計画Agent）
-- `claude-code/agents/doc-review.md`（並列制御フロー追記）
-
-**完了条件**:
-- [ ] 統合Agentが7軸の結果を正しく集約
-- [ ] 修正計画Agentが具体的なアクションプランを生成
-- [ ] Batch 1（4並列）→ Batch 2（3並列）→ 統合 → 修正計画のフローが動作
-- [ ] 品質チェックリスト（移植ガイド§7）全項目クリア
-- [ ] `~/.claude/agents/` にデプロイ完了
-- [ ] 既存 Skill `/doc-review` との関係性が整理済み
 
 ---
 
@@ -125,4 +118,4 @@ backlog:
 
 ## POの承認
 
-- [x] PO承認済み（2026-02-19 01:31）
+- [x] PO承認済み（2026-02-19 12:14）

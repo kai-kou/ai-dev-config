@@ -27,13 +27,39 @@ total_sp: 42
 | （なし） | `tools` | 新規追加。下記ツールマッピング参照 |
 | （なし） | `memory` | オーケストレータのみ必要に応じて `memory: user` |
 
-### 1.2 ツールマッピング
+### 1.2 ツールマッピングと選択ガイド
 
-| Agent役割 | tools 設定 |
-|----------|-----------|
-| オーケストレータ（読み書き両方） | `[Read, Glob, Grep, Bash, Edit, Write]` |
-| 分析・レビュー系（読み取り専用） | `[Read, Glob, Grep]` |
-| 修正・統合系（書き込みあり） | `[Read, Glob, Grep, Bash, Edit, Write]` |
+#### 役割別の推奨 tools パターン
+
+| Agent役割 | tools 設定 | 選択根拠 |
+|----------|-----------|---------|
+| オーケストレータ（読み書き両方） | `[Read, Glob, Grep, Bash, Edit, Write]` | Task tool でサブエージェント起動 + 最終出力の書き込み |
+| 分析・レビュー系（読み取り専用） | `[Read, Glob, Grep]` | コードを読んで分析するだけ。変更権限不要 |
+| 修正・統合系（書き込みあり） | `[Read, Glob, Grep, Bash, Edit, Write]` | 分析結果に基づきファイルを修正・生成 |
+| ヒアリング・対話系 | `[Read, Glob, Grep]` | ユーザーとの対話が中心。ファイル参照のみ |
+| コマンド実行が必要な系 | `[Read, Glob, Grep, Bash]` | git/npm等のコマンド実行が必要だが書き込み不要 |
+
+#### tools 選択の判断フロー
+
+```
+Q1: Agentはファイルを新規作成 or 編集する必要がある？
+  → Yes: Edit, Write を追加
+  → No: 次へ
+
+Q2: Agentはシェルコマンド（git, npm等）を実行する必要がある？
+  → Yes: Bash を追加
+  → No: 次へ
+
+Q3: Agentはコードやドキュメントを読んで分析するだけ？
+  → Yes: [Read, Glob, Grep] のみ（最小権限）
+```
+
+#### 最小権限の原則
+
+- **デフォルトは `[Read, Glob, Grep]`**（読み取り専用）から始める
+- 必要なツールだけを追加する。「念のため全ツール付与」は避ける
+- Bash は外部コマンド実行が明確に必要な場合のみ追加
+- Edit/Write はファイル変更が責務に含まれる場合のみ追加
 
 ### 1.3 サブエージェント参照の変換
 
@@ -72,6 +98,33 @@ Task tool で複数の subagent_type を同時に起動（同一メッセージ�
 |------|------|
 | Agent定義ファイル | `~/.claude/agents/{agent-name}.md` |
 | リポジトリ管理コピー | `claude-code/agents/{agent-name}.md`（このリポジトリ） |
+
+### 1.6 デプロイ手順とサンドボックス制約
+
+#### Claude Code Agent のデプロイ
+
+Claude Code のサンドボックスモードでは `~/.claude/agents/` への書き込みが許可されているため、
+sprint-coder が直接 `~/.claude/agents/` にファイルを配置できる。
+
+```
+手順:
+1. リポジトリ側 `claude-code/agents/` にAgent定義を作成（管理コピー）
+2. `~/.claude/agents/` に同一ファイルをデプロイ（ランタイム配置）
+3. Claude Code が subagent_type として認識することを確認
+```
+
+#### Cursor向けデプロイが必要なケース
+
+`src/` 配下のファイル（Cursor Agent/Skill/Rules）を変更した場合、Cursor環境へのデプロイには `deploy.sh` の実行が必要。
+Claude Code のサンドボックスでは Cursor のホームディレクトリ（`~/.cursor/`）への書き込みが制限されるため、
+PO が手動で `deploy.sh` を実行する必要がある。
+
+```
+制約事項:
+- Claude Code → ~/.claude/agents/ : サンドボックス内で直接書き込み可能
+- Claude Code → ~/.cursor/ : サンドボックス制限により直接書き込み不可
+- src/ 変更を含むスプリントでは、コミット&push後にPOが deploy.sh を実行
+```
 
 ---
 
