@@ -1,7 +1,7 @@
 # Claude Code スキルカタログ
 
 デプロイ先: `~/.claude/skills/`
-スキル総数: 42個
+スキル総数: 43個
 
 ## Frontmatter リファレンス
 
@@ -121,13 +121,14 @@ skills/my-skill/
 | regression-guard | `/regression-guard` | 変更影響分析とデグレ防止 |
 | doc-review | `/doc-review` | ドキュメントを7軸で並列レビュー |
 
-## ドキュメント・コンテンツ生成（4個）
+## ドキュメント・コンテンツ生成（5個）
 
 | スキル | コマンド | 説明 |
 |--------|---------|------|
 | requirement-definition | `/requirement-definition` | 要件定義書をMarkdownで作成 |
-| slides | `/slides` | AI画像生成（Gemini API）→PPTX→Google Drive→GoogleスライドURL案内 |
-| infographic | `/infographic` | グラレコ風インフォグラフィック画像生成 |
+| gemini-image | `/gemini-image` | Gemini APIによる汎用AI画像生成（基盤レイヤー） |
+| infographic | `/infographic` | グラレコ風インフォグラフィック画像生成（gemini-image利用） |
+| slides | `/slides` | AI画像生成→PPTX→Google Drive→GoogleスライドURL案内（infographic/gemini-image利用） |
 | resume-screening | `/resume-screening` | 候補者の書類選考分析 |
 
 ## ユーティリティ（2個）
