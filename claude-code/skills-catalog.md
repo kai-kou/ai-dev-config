@@ -126,7 +126,7 @@ skills/my-skill/
 | スキル | コマンド | 説明 |
 |--------|---------|------|
 | requirement-definition | `/requirement-definition` | 要件定義書をMarkdownで作成 |
-| slides | `/slides` | PPTX生成→Google Drive→GoogleスライドURL案内 |
+| slides | `/slides` | AI画像生成（Gemini API）→PPTX→Google Drive→GoogleスライドURL案内 |
 | infographic | `/infographic` | グラレコ風インフォグラフィック画像生成 |
 | resume-screening | `/resume-screening` | 候補者の書類選考分析 |
 
